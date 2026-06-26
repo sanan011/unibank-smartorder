@@ -1,0 +1,6 @@
+logging:
+  level:
+    root: INFO
+    az.unibank.smartorder: INFO
+
+# In docker, the hostnames are defined by docker-compose, which matches the default values in application.yml when the SPRING_PROFILES_ACTIVE is docker, so we rely on the ENV vars override.

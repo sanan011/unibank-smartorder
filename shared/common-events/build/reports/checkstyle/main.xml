@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.15.0">
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-events\src\main\java\az\unibank\smartorder\events\DomainEvent.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-events\src\main\java\az\unibank\smartorder\events\order\OrderCancelledEvent.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-events\src\main\java\az\unibank\smartorder\events\order\OrderCreatedEvent.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-events\src\main\java\az\unibank\smartorder\events\payment\PaymentFailedEvent.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-events\src\main\java\az\unibank\smartorder\events\payment\PaymentProcessedEvent.java">
+</file>
+</checkstyle>

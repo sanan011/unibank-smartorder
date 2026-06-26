@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.15.0">
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-security\src\main\java\az\unibank\smartorder\security\JwtAuthenticationFilter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-security\src\main\java\az\unibank\smartorder\security\JwtTokenProvider.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-security\src\main\java\az\unibank\smartorder\security\SecurityConfig.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\shared\common-security\src\main\java\az\unibank\smartorder\security\UserPrincipal.java">
+</file>
+</checkstyle>
