@@ -1,0 +1,2 @@
+ALTER TABLE orders ADD COLUMN created_by VARCHAR(255);
+ALTER TABLE orders ADD COLUMN updated_by VARCHAR(255);

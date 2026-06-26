@@ -180,6 +180,8 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\ProductPersistenceAdapter.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\config\AuditorAwareImpl.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderItemJpaEntity.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderJpaEntity.java">

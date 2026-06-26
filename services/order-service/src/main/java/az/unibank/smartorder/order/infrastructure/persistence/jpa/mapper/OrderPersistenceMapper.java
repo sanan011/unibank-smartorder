@@ -17,6 +17,8 @@ public interface OrderPersistenceMapper {
     @Mapping(target = "customerId", source = "customerId.value")
     @Mapping(target = "totalAmount", source = "totalAmount.amount")
     @Mapping(target = "currency", source = "totalAmount.currency")
+    @Mapping(target = "createdBy", ignore = true)
+    @Mapping(target = "updatedBy", ignore = true)
     OrderJpaEntity toJpaEntity(Order order);
 
     @AfterMapping

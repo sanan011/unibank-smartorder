@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-06-27T01:42:56+0400",
+    date = "2026-06-27T01:48:54+0400",
     comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
@@ -36,13 +36,13 @@ public class OrderPersistenceMapperImpl implements OrderPersistenceMapper {
         orderJpaEntity.customerId( orderCustomerIdValue( order ) );
         orderJpaEntity.totalAmount( orderTotalAmountAmount( order ) );
         orderJpaEntity.currency( orderTotalAmountCurrency( order ) );
-        orderJpaEntity.createdAt( order.getCreatedAt() );
-        orderJpaEntity.items( orderItemListToOrderItemJpaEntityList( order.getItems() ) );
         if ( order.getStatus() != null ) {
             orderJpaEntity.status( order.getStatus().name() );
         }
-        orderJpaEntity.updatedAt( order.getUpdatedAt() );
         orderJpaEntity.version( order.getVersion() );
+        orderJpaEntity.createdAt( order.getCreatedAt() );
+        orderJpaEntity.updatedAt( order.getUpdatedAt() );
+        orderJpaEntity.items( orderItemListToOrderItemJpaEntityList( order.getItems() ) );
 
         return orderJpaEntity.build();
     }
@@ -55,13 +55,13 @@ public class OrderPersistenceMapperImpl implements OrderPersistenceMapper {
 
         Order.OrderBuilder order = Order.builder();
 
-        order.createdAt( entity.getCreatedAt() );
-        order.items( orderItemJpaEntityListToOrderItemList( entity.getItems() ) );
         if ( entity.getStatus() != null ) {
             order.status( Enum.valueOf( OrderStatus.class, entity.getStatus() ) );
         }
-        order.updatedAt( entity.getUpdatedAt() );
+        order.items( orderItemJpaEntityListToOrderItemList( entity.getItems() ) );
         order.version( entity.getVersion() );
+        order.createdAt( entity.getCreatedAt() );
+        order.updatedAt( entity.getUpdatedAt() );
 
         order.id( az.unibank.smartorder.order.domain.model.valueobject.OrderId.of(entity.getId()) );
         order.customerId( az.unibank.smartorder.order.domain.model.valueobject.CustomerId.of(entity.getCustomerId()) );

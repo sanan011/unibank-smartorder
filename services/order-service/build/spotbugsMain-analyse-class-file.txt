@@ -102,6 +102,7 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OrderPersistenceAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OutboxPersistenceAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\ProductPersistenceAdapter.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\config\AuditorAwareImpl.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderItemJpaEntity$OrderItemJpaEntityBuilder.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderItemJpaEntity.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderJpaEntity$OrderJpaEntityBuilder.class
