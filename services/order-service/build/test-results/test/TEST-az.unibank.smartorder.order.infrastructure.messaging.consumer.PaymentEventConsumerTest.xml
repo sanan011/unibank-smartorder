@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="az.unibank.smartorder.order.infrastructure.messaging.consumer.PaymentEventConsumerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-06-26T14:29:51" hostname="DESKTOP-FBUDNCG" time="1.264">
+  <properties/>
+  <testcase name="onPaymentProcessed_whenEventIsValid_delegatesToUseCase()" classname="az.unibank.smartorder.order.infrastructure.messaging.consumer.PaymentEventConsumerTest" time="1.216"/>
+  <testcase name="onPaymentFailed_whenEventIsValid_delegatesToUseCase()" classname="az.unibank.smartorder.order.infrastructure.messaging.consumer.PaymentEventConsumerTest" time="0.042"/>
+  <system-out><![CDATA[18:29:52.483 [Test worker] INFO az.unibank.smartorder.order.infrastructure.messaging.consumer.PaymentEventConsumer -- Received PaymentProcessedEvent: {eventId=2d66bf94-1627-47c5-8d63-ec11c4eabb65, payload={totalAmount=100.5, orderId=119d0474-57ce-43a7-9ed8-ed997c974020}, correlationId=e3ca4324-8b23-4a4c-b6b5-970fc793444d}
+18:29:52.919 [Test worker] INFO az.unibank.smartorder.order.infrastructure.messaging.consumer.PaymentEventConsumer -- Received PaymentFailedEvent: {eventId=ac449a4d-6be6-4842-a003-9ccfac68c0a4, payload={reason=failed, orderId=33c71a7d-58a3-4a27-b977-e274440ef8b6}, correlationId=9cc5678a-e13b-44bf-ae9f-03b21d8de573}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

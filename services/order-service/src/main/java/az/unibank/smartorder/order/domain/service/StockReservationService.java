@@ -27,4 +27,14 @@ public class StockReservationService {
             productRepository.save(product);
         }
     }
+
+    public void releaseStockFor(Order order) {
+        for (OrderItem item : order.getItems()) {
+            Product product = productRepository.findByIdWithPessimisticLock(item.getProductId())
+                .orElseThrow(() -> new BusinessException("PRODUCT_NOT_FOUND", "Product not found", 404));
+
+            product.increaseStock(item.getQuantity());
+            productRepository.save(product);
+        }
+    }
 }

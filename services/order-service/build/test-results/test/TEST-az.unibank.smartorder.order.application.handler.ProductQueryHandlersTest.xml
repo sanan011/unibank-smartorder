@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-06-26T13:38:36" hostname="DESKTOP-FBUDNCG" time="3.324">
+<testsuite name="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-06-26T14:29:50" hostname="DESKTOP-FBUDNCG" time="1.001">
   <properties/>
-  <testcase name="getProduct_concurrentCacheMiss_onlyOneDatabaseLoad()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="2.654"/>
-  <testcase name="getProduct_whenLockTimesOut_fallsBackToDb()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="0.64"/>
-  <testcase name="getProduct_whenCacheHit_returnsFromCache()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="0.014"/>
+  <testcase name="getProduct_concurrentCacheMiss_onlyOneDatabaseLoad()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="0.412"/>
+  <testcase name="getProduct_whenLockTimesOut_fallsBackToDb()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="0.573"/>
+  <testcase name="getProduct_whenCacheHit_returnsFromCache()" classname="az.unibank.smartorder.order.application.handler.ProductQueryHandlersTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\User\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.16\4a451ee6484abac3a498df0f3b33ed00a6fced4d\byte-buddy-agent-1.14.16.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

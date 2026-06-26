@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="az.unibank.smartorder.events.EventContractValidationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-06-26T14:30:17" hostname="DESKTOP-FBUDNCG" time="0.714">
+  <properties/>
+  <testcase name="shouldSerializeAndDeserializeOrderCreatedEvent()" classname="az.unibank.smartorder.events.EventContractValidationTest" time="0.649"/>
+  <testcase name="shouldSerializeAndDeserializePaymentProcessedEvent()" classname="az.unibank.smartorder.events.EventContractValidationTest" time="0.027"/>
+  <testcase name="shouldSerializeAndDeserializePaymentFailedEvent()" classname="az.unibank.smartorder.events.EventContractValidationTest" time="0.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

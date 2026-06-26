@@ -63,6 +63,9 @@ public class Order {
     }
 
     public void failPayment() {
+        if (this.status == OrderStatus.PAYMENT_FAILED) {
+            return; // Idempotent: already failed
+        }
         if (this.status != OrderStatus.PROCESSING) {
             throw new BusinessException("INVALID_TRANSITION", "Order must be PROCESSING to fail payment", 400);
         }

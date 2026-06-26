@@ -19,6 +19,24 @@ services:
       retries: 5
     restart: unless-stopped
 
+  postgres-payment:
+    image: postgres:16-alpine
+    container_name: postgres-payment
+    environment:
+      POSTGRES_DB: ${DB_NAME_PAYMENT:-payment_db}
+      POSTGRES_USER: ${DB_USER:-smartorder}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-supersecret_db_password}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_payment_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-smartorder} -d ${DB_NAME_PAYMENT:-payment_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   redis:
     image: redis:7-alpine
     container_name: redis
@@ -82,7 +100,32 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  payment-service:
+    build:
+      context: ..
+      dockerfile: infrastructure/docker/payment-service.Dockerfile
+    container_name: payment-service
+    ports:
+      - "8081:8080"
+    environment:
+      - DB_HOST=postgres-payment
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME_PAYMENT:-payment_db}
+      - DB_USER=${DB_USER:-smartorder}
+      - DB_PASSWORD=${DB_PASSWORD:-supersecret_db_password}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=${RABBITMQ_USER:-admin}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-supersecret_rmq_password}
+    depends_on:
+      postgres-payment:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   postgres_data:
+  postgres_payment_data:
   redis_data:
   rabbitmq_data:

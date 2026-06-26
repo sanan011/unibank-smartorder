@@ -1,0 +1,1 @@
+C:\Users\User\Desktop\unibank-smartorder\shared\common-events\build\classes\java\test\az\unibank\smartorder\events\EventContractValidationTest.class

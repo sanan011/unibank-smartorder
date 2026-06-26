@@ -1,10 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.15.0">
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\model\aggregate\Payment.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\model\entity\PaymentTransaction.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\model\valueobject\PaymentId.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\model\valueobject\PaymentStatus.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\model\valueobject\PaymentTransactionId.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\port\inbound\ProcessOrderPaymentUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\port\outbound\EventPublisherPort.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\port\outbound\IdempotencyRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\port\outbound\PaymentGatewayPort.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\port\outbound\PaymentRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\domain\service\PaymentProcessingService.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\gateway\MockPaymentGatewayAdapter.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\gateway\PaymentGatewayException.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\messaging\consumer\OrderEventConsumer.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\messaging\publisher\PaymentEventPublisher.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\adapter\DbIdempotencyGuardAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\adapter\PaymentPersistenceAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\entity\PaymentJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\entity\PaymentTransactionJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\entity\ProcessedEventJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\mapper\PaymentPersistenceMapper.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\repository\PaymentJpaRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\persistence\jpa\repository\ProcessedEventJpaRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\PaymentApplication.java">
 </file>

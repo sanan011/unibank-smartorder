@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="az.unibank.smartorder.payment.infrastructure.messaging.consumer.OrderEventConsumerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-06-26T14:30:10" hostname="DESKTOP-FBUDNCG" time="0.994">
+  <properties/>
+  <testcase name="onOrderCreated_whenEventIsValid_delegatesToUseCase()" classname="az.unibank.smartorder.payment.infrastructure.messaging.consumer.OrderEventConsumerTest" time="0.994"/>
+  <system-out><![CDATA[18:30:11.388 [Test worker] INFO az.unibank.smartorder.payment.infrastructure.messaging.consumer.OrderEventConsumer -- Received OrderCreatedEvent: {eventId=9add51d3-1552-4fb9-a414-153f9a222cba, payload={totalAmount=100.5, orderId=786b8d30-8662-447f-838a-e9f9d6886df1}, correlationId=f393ba00-2969-4182-8859-cb8bbc6b9955}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

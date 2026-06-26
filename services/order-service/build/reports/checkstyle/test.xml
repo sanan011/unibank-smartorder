@@ -2,6 +2,14 @@
 <checkstyle version="10.15.0">
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\adapter\inbound\web\filter\RateLimitIntegrationTest.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\application\handler\CompensationIntegrationTest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\application\handler\CompensationUnitTest.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\application\handler\ProductQueryHandlersTest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\application\handler\SagaOrderE2EIntegrationTest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumerTest.java">
 </file>
 </checkstyle>

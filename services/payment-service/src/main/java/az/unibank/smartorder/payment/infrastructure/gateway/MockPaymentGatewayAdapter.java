@@ -9,9 +9,11 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import az.unibank.smartorder.payment.domain.port.outbound.PaymentGatewayPort;
+
 @Service
 @Slf4j
-public class MockPaymentGatewayAdapter {
+public class MockPaymentGatewayAdapter implements PaymentGatewayPort {
 
     private final AtomicBoolean forceFailure = new AtomicBoolean(false);
 

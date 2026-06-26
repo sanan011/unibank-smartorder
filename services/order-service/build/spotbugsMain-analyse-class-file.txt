@@ -73,13 +73,17 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\model\valueobject\ProductId.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\model\valueobject\StockQuantity.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\CancelOrderUseCase.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\CompleteOrderUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\CreateOrderUseCase.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\FailOrderUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\GetOrderUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\GetProductUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\ListOrdersUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\ListProductsUseCase.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\ProcessPaymentEventUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\inbound\UpdateStockUseCase.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\outbound\EventPublisher.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\outbound\IdempotencyRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\outbound\OrderRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\outbound\OutboxRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\domain\port\outbound\ProductCacheRepository.class
@@ -92,7 +96,9 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\cache\RedisProductCacheAdapter$CachedProduct.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\cache\RedisProductCacheAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\adapter\RabbitMQEventPublisherAdapter.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumer.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\outbox\OutboxRelayService.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\DbIdempotencyGuardAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OrderPersistenceAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OutboxPersistenceAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\ProductPersistenceAdapter.class
@@ -102,6 +108,8 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderJpaEntity.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OutboxEventJpaEntity$OutboxEventJpaEntityBuilder.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OutboxEventJpaEntity.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProcessedEventJpaEntity$ProcessedEventJpaEntityBuilder.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProcessedEventJpaEntity.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProductJpaEntity$ProductJpaEntityBuilder.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProductJpaEntity.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\mapper\OrderPersistenceMapper.class
@@ -110,6 +118,7 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\mapper\ProductPersistenceMapperImpl.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OrderJpaRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OutboxJpaRepository.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\ProcessedEventJpaRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\ProductJpaRepository.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\ratelimit\RedisRateLimiterService.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\OrderServiceApplication.class

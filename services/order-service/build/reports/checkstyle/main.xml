@@ -126,7 +126,11 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\CancelOrderUseCase.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\CompleteOrderUseCase.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\CreateOrderUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\FailOrderUseCase.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\GetOrderUseCase.java">
 </file>
@@ -136,9 +140,13 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\ListProductsUseCase.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\ProcessPaymentEventUseCase.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\UpdateStockUseCase.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\EventPublisher.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\IdempotencyRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\OrderRepository.java">
 </file>
@@ -160,7 +168,11 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\adapter\RabbitMQEventPublisherAdapter.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumer.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\outbox\OutboxRelayService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\DbIdempotencyGuardAdapter.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OrderPersistenceAdapter.java">
 </file>
@@ -174,6 +186,8 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OutboxEventJpaEntity.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProcessedEventJpaEntity.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProductJpaEntity.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\mapper\OrderPersistenceMapper.java">
@@ -183,6 +197,8 @@
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OrderJpaRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OutboxJpaRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\ProcessedEventJpaRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\ProductJpaRepository.java">
 </file>

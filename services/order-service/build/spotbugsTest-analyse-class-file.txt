@@ -1,2 +1,6 @@
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\adapter\inbound\web\filter\RateLimitIntegrationTest.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\application\handler\CompensationIntegrationTest.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\application\handler\CompensationUnitTest.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\application\handler\ProductQueryHandlersTest.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\application\handler\SagaOrderE2EIntegrationTest.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumerTest.class

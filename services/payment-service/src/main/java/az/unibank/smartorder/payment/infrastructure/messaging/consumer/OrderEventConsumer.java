@@ -1,7 +1,9 @@
 package az.unibank.smartorder.payment.infrastructure.messaging.consumer;
 
-import az.unibank.smartorder.payment.infrastructure.gateway.MockPaymentGatewayAdapter;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import az.unibank.smartorder.events.order.OrderCreatedEvent;
+import az.unibank.smartorder.payment.domain.port.inbound.ProcessOrderPaymentUseCase;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -10,60 +12,40 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Map;
-import java.util.UUID;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
+@edu.umd.cs.findbugs.annotations.SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Spring-managed bean")
 public class OrderEventConsumer {
 
-    private final MockPaymentGatewayAdapter paymentGatewayAdapter;
-
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Spring-managed bean")
-    public OrderEventConsumer(MockPaymentGatewayAdapter paymentGatewayAdapter) {
-        this.paymentGatewayAdapter = paymentGatewayAdapter;
-    }
+    private final ProcessOrderPaymentUseCase processOrderPaymentUseCase;
+    private final ObjectMapper objectMapper;
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "payment.order.created.queue", durable = "true"),
             exchange = @Exchange(value = "smartorder.events", type = "topic", durable = "true"),
             key = "order.created"
     ))
-    public void onOrderCreated(@Payload Map<String, Object> event) {
-        log.info("Received OrderCreatedEvent: {}", event);
+    public void onOrderCreated(@Payload Map<String, Object> eventMap) {
+        log.info("Received OrderCreatedEvent: {}", eventMap);
 
         try {
-            Map<String, Object> payload = (Map<String, Object>) event.get("payload");
-            if (payload == null) {
-                log.warn("Event payload is null, skipping");
+            OrderCreatedEvent event = objectMapper.convertValue(eventMap, OrderCreatedEvent.class);
+            
+            if (event.eventId() == null || event.payload() == null || event.payload().orderId() == null) {
+                log.warn("Invalid event payload, skipping: {}", eventMap);
                 return;
             }
 
-            String orderIdStr = (String) payload.get("orderId");
-            Number amountNum = (Number) payload.get("totalAmount");
-            
-            if (orderIdStr == null || amountNum == null) {
-                log.warn("Missing orderId or totalAmount in payload: {}", payload);
-                return;
-            }
-
-            UUID orderId = UUID.fromString(orderIdStr);
-            BigDecimal amount = new BigDecimal(amountNum.toString());
-
-            boolean success = paymentGatewayAdapter.processPayment(orderId, amount);
-            
-            if (success) {
-                log.info("Successfully processed payment for order: {}", orderId);
-                // In a complete implementation, we would publish a PaymentProcessedEvent here
-            } else {
-                log.warn("Failed to process payment for order: {} after retries", orderId);
-                // In a complete implementation, we would publish a PaymentFailedEvent here
-            }
-
+            processOrderPaymentUseCase.processPayment(event);
+        } catch (IllegalArgumentException e) {
+            log.error("Failed to parse event map into OrderCreatedEvent: {}", eventMap, e);
+            throw e;
         } catch (Exception e) {
             log.error("Error processing OrderCreatedEvent", e);
-            throw e; // Rethrow to requeue or DLQ depending on config
+            throw e;
         }
     }
 }
