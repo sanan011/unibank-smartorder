@@ -1,5 +1,7 @@
 version: '3.8'
 
+# Architecture Note: TLS termination is intentionally omitted from this docker-compose configuration.
+# In production, TLS termination will be handled at the Load Balancer / Reverse Proxy layer.
 services:
   postgres-order:
     image: postgres:16-alpine
