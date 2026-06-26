@@ -38,7 +38,7 @@ public class NotificationEventHandlers {
     }
 
     public void handlePaymentProcessedEvent(PaymentProcessedEvent event) {
-        UUID customerId = resolveCustomerId(event.payload().orderId());
+        UUID customerId = event.payload().customerId();
         Notification notification = Notification.builder()
                 .id(NotificationId.of(UUID.randomUUID()))
                 .orderId(event.payload().orderId())
@@ -53,7 +53,7 @@ public class NotificationEventHandlers {
     }
 
     public void handlePaymentFailedEvent(PaymentFailedEvent event) {
-        UUID customerId = resolveCustomerId(event.payload().orderId());
+        UUID customerId = event.payload().customerId();
         Notification notification = Notification.builder()
                 .id(NotificationId.of(UUID.randomUUID()))
                 .orderId(event.payload().orderId())
@@ -81,9 +81,4 @@ public class NotificationEventHandlers {
         notificationRepository.save(notification);
     }
 
-    private UUID resolveCustomerId(UUID orderId) {
-        return notificationRepository.findFirstByOrderId(orderId)
-                .map(Notification::getCustomerId)
-                .orElse(null);
-    }
 }

@@ -91,7 +91,7 @@ public class PaymentProcessingService implements ProcessOrderPaymentUseCase {
             paymentRepository.save(payment);
 
             PaymentProcessedEvent.Payload processedPayload = new PaymentProcessedEvent.Payload(
-                    orderId, payment.getId().value(), "SUCCESS", amount, payment.getCurrency(), gatewayRef
+                    orderId, customerId, payment.getId().value(), "SUCCESS", amount, payment.getCurrency(), gatewayRef
             );
             eventPublisherPort.publish("payment.processed", new PaymentProcessedEvent(correlationId, processedPayload));
         } else {
@@ -99,7 +99,7 @@ public class PaymentProcessingService implements ProcessOrderPaymentUseCase {
             paymentRepository.save(payment);
 
             PaymentFailedEvent.Payload failedPayload = new PaymentFailedEvent.Payload(
-                    orderId, payment.getId().value(), "Payment declined by mock gateway", payment.getAttemptCount()
+                    orderId, customerId, payment.getId().value(), "Payment declined by mock gateway", payment.getAttemptCount()
             );
             eventPublisherPort.publish("payment.failed", new PaymentFailedEvent(correlationId, failedPayload));
         }

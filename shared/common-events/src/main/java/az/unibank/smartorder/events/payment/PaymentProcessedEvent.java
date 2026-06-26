@@ -20,6 +20,7 @@ public record PaymentProcessedEvent(
 
     public record Payload(
         UUID orderId,
+        UUID customerId,
         UUID paymentId,
         String status,
         BigDecimal amount,

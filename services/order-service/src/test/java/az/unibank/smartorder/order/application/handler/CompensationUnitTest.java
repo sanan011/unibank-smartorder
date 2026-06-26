@@ -83,7 +83,7 @@ class CompensationUnitTest {
     void shouldSkipDuplicateCompensationEvents() {
         UUID eventId = UUID.randomUUID();
         PaymentFailedEvent event = new PaymentFailedEvent(eventId, "PaymentFailedEvent", "1.0", null, UUID.randomUUID(),
-                new PaymentFailedEvent.Payload(orderId.getValue(), UUID.randomUUID(), "Failed", 1));
+                new PaymentFailedEvent.Payload(orderId.getValue(), UUID.randomUUID(), UUID.randomUUID(), "Failed", 1));
 
         when(idempotencyRepository.exists(eventId.toString())).thenReturn(true);
 
@@ -98,7 +98,7 @@ class CompensationUnitTest {
         UUID eventId = UUID.randomUUID();
         az.unibank.smartorder.events.payment.PaymentProcessedEvent event = new az.unibank.smartorder.events.payment.PaymentProcessedEvent(
                 orderId.getValue(),
-                new az.unibank.smartorder.events.payment.PaymentProcessedEvent.Payload(orderId.getValue(), UUID.randomUUID(), "SUCCESS", new java.math.BigDecimal("150.00"), "USD", "ref-123")
+                new az.unibank.smartorder.events.payment.PaymentProcessedEvent.Payload(orderId.getValue(), UUID.randomUUID(), UUID.randomUUID(), "SUCCESS", new java.math.BigDecimal("150.00"), "USD", "ref-123")
         );
         // Override the generated eventId to our specific one for testing
         az.unibank.smartorder.events.payment.PaymentProcessedEvent eventWithId = new az.unibank.smartorder.events.payment.PaymentProcessedEvent(

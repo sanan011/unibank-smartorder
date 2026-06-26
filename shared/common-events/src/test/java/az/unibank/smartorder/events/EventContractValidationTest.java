@@ -59,10 +59,11 @@ class EventContractValidationTest {
     @Test
     void shouldSerializeAndDeserializePaymentProcessedEvent() throws Exception {
         UUID orderId = UUID.randomUUID();
+        UUID customerId = UUID.randomUUID();
         UUID paymentId = UUID.randomUUID();
         PaymentProcessedEvent event = new PaymentProcessedEvent(
                 orderId,
-                new PaymentProcessedEvent.Payload(orderId, paymentId, "SUCCESS", new BigDecimal("150.00"), "USD", "ref-123")
+                new PaymentProcessedEvent.Payload(orderId, customerId, paymentId, "SUCCESS", new BigDecimal("150.00"), "USD", "ref-123")
         );
 
         String json = objectMapper.writeValueAsString(event);
@@ -73,6 +74,7 @@ class EventContractValidationTest {
         assertThat(deserialized.correlationId()).isEqualTo(orderId);
         
         assertThat(deserialized.payload().orderId()).isEqualTo(orderId);
+        assertThat(deserialized.payload().customerId()).isEqualTo(customerId);
         assertThat(deserialized.payload().paymentId()).isEqualTo(paymentId);
         assertThat(deserialized.payload().status()).isEqualTo("SUCCESS");
     }
@@ -80,10 +82,11 @@ class EventContractValidationTest {
     @Test
     void shouldSerializeAndDeserializePaymentFailedEvent() throws Exception {
         UUID orderId = UUID.randomUUID();
+        UUID customerId = UUID.randomUUID();
         UUID paymentId = UUID.randomUUID();
         PaymentFailedEvent event = new PaymentFailedEvent(
                 orderId,
-                new PaymentFailedEvent.Payload(orderId, paymentId, "INSUFFICIENT_FUNDS", 1)
+                new PaymentFailedEvent.Payload(orderId, customerId, paymentId, "INSUFFICIENT_FUNDS", 1)
         );
 
         String json = objectMapper.writeValueAsString(event);
@@ -94,6 +97,7 @@ class EventContractValidationTest {
         assertThat(deserialized.correlationId()).isEqualTo(orderId);
         
         assertThat(deserialized.payload().orderId()).isEqualTo(orderId);
+        assertThat(deserialized.payload().customerId()).isEqualTo(customerId);
         assertThat(deserialized.payload().paymentId()).isEqualTo(paymentId);
         assertThat(deserialized.payload().reason()).isEqualTo("INSUFFICIENT_FUNDS");
         assertThat(deserialized.payload().attemptCount()).isEqualTo(1);

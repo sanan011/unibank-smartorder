@@ -116,6 +116,7 @@ class SagaOrderE2EIntegrationTest {
                 new PaymentProcessedEvent.Payload(
                         createdOrder.getId().getValue(), 
                         UUID.randomUUID(), 
+                        UUID.randomUUID(), 
                         "SUCCESS", 
                         new BigDecimal("200.00"), 
                         "USD", 
@@ -152,6 +153,7 @@ class SagaOrderE2EIntegrationTest {
                 createdOrder.getId().getValue(),
                 new PaymentFailedEvent.Payload(
                         createdOrder.getId().getValue(), 
+                        UUID.randomUUID(), 
                         UUID.randomUUID(), 
                         "INSUFFICIENT_FUNDS", 
                         1

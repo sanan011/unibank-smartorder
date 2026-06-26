@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="az.unibank.smartorder.order.application.handler.CompensationUnitTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-06-26T14:29:45" hostname="DESKTOP-FBUDNCG" time="5.528">
+<testsuite name="az.unibank.smartorder.order.application.handler.CompensationUnitTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-06-26T21:45:56" hostname="DESKTOP-FBUDNCG" time="1.205">
   <properties/>
-  <testcase name="shouldThrowWhenTransitionIsInvalid()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="4.575"/>
-  <testcase name="shouldSkipDuplicateCompensationEvents()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.105"/>
-  <testcase name="shouldSuccessfullyCompensateProcessingOrder()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.717"/>
-  <testcase name="shouldBeIdempotentForAlreadyFailedOrder()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.071"/>
-  <system-out><![CDATA[18:29:49.661 [Test worker] INFO az.unibank.smartorder.order.application.handler.OrderCommandHandlers -- Event 501c2124-c448-4a0c-97a3-8a53a849e3c2 already processed, skipping duplicate
-18:29:49.763 [Test worker] INFO az.unibank.smartorder.order.application.handler.OrderCommandHandlers -- Released stock for failed order ef7b17d6-1f99-4de3-a18b-8b352215a0a4
-18:29:50.540 [Test worker] INFO az.unibank.smartorder.order.application.handler.OrderCommandHandlers -- Order a28e5857-cd13-4225-8dd1-430a22a50cd5 is already in PAYMENT_FAILED state. Skipping compensation.
+  <testcase name="shouldThrowWhenTransitionIsInvalid()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.832"/>
+  <testcase name="shouldSkipDuplicateCompensationEvents()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.071"/>
+  <testcase name="shouldSkipDuplicateEventsOnConcurrentDelivery()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.031"/>
+  <testcase name="shouldSuccessfullyCompensateProcessingOrder()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.242"/>
+  <testcase name="shouldBeIdempotentForAlreadyFailedOrder()" classname="az.unibank.smartorder.order.application.handler.CompensationUnitTest" time="0.01"/>
+  <system-out><![CDATA[2026-06-27T01:45:57.558+04:00  INFO 23472 --- [order-service] [    Test worker] a.u.s.o.a.handler.OrderCommandHandlers   : Event 01781d44-5ff2-445e-9aa2-dd17a035c1e3 already processed, skipping duplicate
+2026-06-27T01:45:57.648+04:00  INFO 23472 --- [order-service] [    Test worker] a.u.s.o.a.handler.OrderCommandHandlers   : Event ff2b1370-dc54-43eb-bfc7-a576ea607f24 processed concurrently, skipping duplicate
+2026-06-27T01:45:57.659+04:00  INFO 23472 --- [order-service] [    Test worker] a.u.s.o.a.handler.OrderCommandHandlers   : Released stock for failed order dee23a97-29f4-46d4-8692-8e23246d1fa8
+2026-06-27T01:45:57.903+04:00  INFO 23472 --- [order-service] [    Test worker] a.u.s.o.a.handler.OrderCommandHandlers   : Order 132594d9-6710-420d-96e7-dd2fd0294865 is already in PAYMENT_FAILED state. Skipping compensation.
 ]]></system-out>
-  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\User\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.16\4a451ee6484abac3a498df0f3b33ed00a6fced4d\byte-buddy-agent-1.14.16.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

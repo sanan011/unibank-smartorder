@@ -115,7 +115,7 @@ class CompensationIntegrationTest {
         UUID eventId = UUID.randomUUID();
         PaymentFailedEvent event = new PaymentFailedEvent(
                 eventId, "PaymentFailedEvent", "1.0", null, UUID.randomUUID(),
-                new PaymentFailedEvent.Payload(orderId, UUID.randomUUID(), "Insufficient funds", 1)
+                new PaymentFailedEvent.Payload(orderId, UUID.randomUUID(), UUID.randomUUID(), "Insufficient funds", 1)
         );
 
         // Concurrent delivery test

@@ -19,6 +19,7 @@ public record PaymentFailedEvent(
 
     public record Payload(
         UUID orderId,
+        UUID customerId,
         UUID paymentId,
         String reason,
         int attemptCount
