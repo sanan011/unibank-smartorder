@@ -42,10 +42,10 @@ public class OrderEventConsumer {
             processOrderPaymentUseCase.processPayment(event);
         } catch (IllegalArgumentException e) {
             log.error("Failed to parse event map into OrderCreatedEvent: {}", eventMap, e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Unparseable event payload", e);
         } catch (Exception e) {
             log.error("Error processing OrderCreatedEvent", e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Error processing event", e);
         }
     }
 }

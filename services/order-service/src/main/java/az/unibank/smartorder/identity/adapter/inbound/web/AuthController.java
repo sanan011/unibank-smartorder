@@ -30,6 +30,8 @@ public class AuthController {
     private final RegisterUserUseCase registerUseCase;
     private final AuthenticateUserUseCase authenticateUseCase;
     private final RefreshTokenUseCase refreshUseCase;
+    private final az.unibank.smartorder.security.JwtTokenProvider tokenProvider;
+    private final az.unibank.smartorder.security.TokenBlocklist tokenBlocklist;
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterRequest request) {
@@ -57,5 +59,20 @@ public class AuthController {
                 .expiresIn(tokenPair.getExpiresIn())
                 .tokenType("Bearer")
                 .build());
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(@org.springframework.web.bind.annotation.RequestHeader(value = "Authorization", required = false) String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            io.jsonwebtoken.Claims claims = tokenProvider.getValidatedClaims(token);
+            if (claims != null && claims.getId() != null && claims.getExpiration() != null) {
+                long ttl = claims.getExpiration().getTime() - System.currentTimeMillis();
+                if (ttl > 0) {
+                    tokenBlocklist.blockToken(claims.getId(), ttl);
+                }
+            }
+        }
+        return ResponseEntity.noContent().build();
     }
 }

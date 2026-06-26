@@ -1,0 +1,164 @@
+{
+  "rabbit_version": "3.13",
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "queues": [
+    {
+      "name": "payment.order.created.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "smartorder.dlx",
+        "x-dead-letter-routing-key": "payment.order.created.dlq"
+      }
+    },
+    {
+      "name": "payment.order.created.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "order.payment.processed.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "smartorder.dlx",
+        "x-dead-letter-routing-key": "order.payment.processed.dlq"
+      }
+    },
+    {
+      "name": "order.payment.processed.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "order.payment.failed.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "smartorder.dlx",
+        "x-dead-letter-routing-key": "order.payment.failed.dlq"
+      }
+    },
+    {
+      "name": "order.payment.failed.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "notification.queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-dead-letter-exchange": "smartorder.dlx",
+        "x-dead-letter-routing-key": "notification.dlq"
+      }
+    },
+    {
+      "name": "notification.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "smartorder.events",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "smartorder.dlx",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "smartorder.events",
+      "vhost": "/",
+      "destination": "payment.order.created.queue",
+      "destination_type": "queue",
+      "routing_key": "order.created",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.events",
+      "vhost": "/",
+      "destination": "order.payment.processed.queue",
+      "destination_type": "queue",
+      "routing_key": "payment.processed",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.events",
+      "vhost": "/",
+      "destination": "order.payment.failed.queue",
+      "destination_type": "queue",
+      "routing_key": "payment.failed",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.events",
+      "vhost": "/",
+      "destination": "notification.queue",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.dlx",
+      "vhost": "/",
+      "destination": "payment.order.created.dlq",
+      "destination_type": "queue",
+      "routing_key": "payment.order.created.dlq",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.dlx",
+      "vhost": "/",
+      "destination": "order.payment.processed.dlq",
+      "destination_type": "queue",
+      "routing_key": "order.payment.processed.dlq",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.dlx",
+      "vhost": "/",
+      "destination": "order.payment.failed.dlq",
+      "destination_type": "queue",
+      "routing_key": "order.payment.failed.dlq",
+      "arguments": {}
+    },
+    {
+      "source": "smartorder.dlx",
+      "vhost": "/",
+      "destination": "notification.dlq",
+      "destination_type": "queue",
+      "routing_key": "notification.dlq",
+      "arguments": {}
+    }
+  ]
+}

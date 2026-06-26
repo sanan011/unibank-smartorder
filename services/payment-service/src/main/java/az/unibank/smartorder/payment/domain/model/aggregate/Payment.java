@@ -42,6 +42,14 @@ public class Payment {
         this.updatedAt = Instant.now();
     }
 
+    public void resetToPending() {
+        if (this.status != PaymentStatus.FAILED) {
+            throw new IllegalStateException("Payment must be in FAILED state to be reset to PENDING");
+        }
+        this.status = PaymentStatus.PENDING;
+        this.updatedAt = Instant.now();
+    }
+
     public void markSuccess(String gatewayReference) {
         if (this.status != PaymentStatus.PROCESSING) {
             throw new IllegalStateException("Payment must be in PROCESSING state to be marked as success");

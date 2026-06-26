@@ -23,7 +23,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Testcontainers
 @ActiveProfiles("local") // local profile disables auth if needed, but not web here
-@Disabled("Requires Docker for Testcontainers")
 class CircuitBreakerIntegrationTest {
 
     @Container

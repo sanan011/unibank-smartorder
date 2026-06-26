@@ -30,8 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Testcontainers
-@ActiveProfiles("local")
-@Disabled("Requires Docker for Testcontainers")
+@ActiveProfiles("test")
 class SagaPaymentE2EIntegrationTest {
 
     @Container

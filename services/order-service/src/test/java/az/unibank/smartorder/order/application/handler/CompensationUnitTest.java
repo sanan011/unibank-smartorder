@@ -94,6 +94,32 @@ class CompensationUnitTest {
     }
 
     @Test
+    void shouldSkipDuplicateEventsOnConcurrentDelivery() {
+        UUID eventId = UUID.randomUUID();
+        az.unibank.smartorder.events.payment.PaymentProcessedEvent event = new az.unibank.smartorder.events.payment.PaymentProcessedEvent(
+                orderId.getValue(),
+                new az.unibank.smartorder.events.payment.PaymentProcessedEvent.Payload(orderId.getValue(), UUID.randomUUID(), "SUCCESS", new java.math.BigDecimal("150.00"), "USD", "ref-123")
+        );
+        // Override the generated eventId to our specific one for testing
+        az.unibank.smartorder.events.payment.PaymentProcessedEvent eventWithId = new az.unibank.smartorder.events.payment.PaymentProcessedEvent(
+                eventId,
+                "PaymentProcessedEvent",
+                "1.0",
+                java.time.Instant.now(),
+                orderId.getValue(),
+                event.payload()
+        );
+
+        when(idempotencyRepository.exists(eventId.toString())).thenReturn(false);
+        doThrow(new org.springframework.dao.DataIntegrityViolationException("Duplicate"))
+                .when(idempotencyRepository).save(eventId.toString(), "PaymentProcessedEvent");
+
+        orderCommandHandlers.processPaymentProcessedEvent(eventWithId);
+
+        verify(orderRepository, never()).findById(any());
+    }
+
+    @Test
     void shouldThrowWhenTransitionIsInvalid() {
         Order pendingOrder = Order.builder().id(orderId).status(OrderStatus.PAID).build();
         when(orderRepository.findById(orderId)).thenReturn(Optional.of(pendingOrder));

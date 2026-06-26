@@ -44,7 +44,14 @@ jwt:
     access: 3600000
     refresh: 604800000
 
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
 management:
+  server:
+    port: 8090
   endpoints:
     web:
       exposure:
@@ -52,9 +59,6 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-
-server:
-  port: 8080
 
 rate-limit:
   enabled: true

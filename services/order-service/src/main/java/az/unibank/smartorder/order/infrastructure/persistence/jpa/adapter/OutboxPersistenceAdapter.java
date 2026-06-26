@@ -27,7 +27,7 @@ public class OutboxPersistenceAdapter implements OutboxRepository {
             OutboxEventJpaEntity entity = OutboxEventJpaEntity.builder()
                     .id(event.eventId())
                     .aggregateType("Order")
-                    .aggregateId(event.eventId())
+                    .aggregateId(event.correlationId())
                     .eventType(event.eventType())
                     .payload(objectMapper.writeValueAsString(event))
                     .status("PENDING")

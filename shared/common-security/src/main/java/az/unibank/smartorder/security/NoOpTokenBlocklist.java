@@ -10,4 +10,14 @@ public class NoOpTokenBlocklist implements TokenBlocklist {
     public boolean isBlocked(String subject) {
         return false;
     }
+
+    @Override
+    public void blockToken(String jti, long ttlMs) {
+        // No-op
+    }
+
+    @Override
+    public boolean isTokenBlocked(String jti) {
+        return false;
+    }
 }

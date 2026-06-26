@@ -88,6 +88,11 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new BusinessException("ORDER_NOT_FOUND", "Order not found", 404));
         
+        if (order.getStatus() == az.unibank.smartorder.order.domain.model.valueobject.OrderStatus.PAID) {
+            log.info("Order {} is already in PAID state. Skipping completion.", orderId.getValue());
+            return order;
+        }
+
         if (order.getStatus() == az.unibank.smartorder.order.domain.model.valueobject.OrderStatus.PENDING) {
             order.processPayment();
         }
@@ -130,11 +135,16 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
             return;
         }
 
+        try {
+            idempotencyRepository.save(eventId, event.eventType());
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            log.info("Event {} processed concurrently, skipping duplicate", eventId);
+            return;
+        }
+
         OrderId orderId = OrderId.of(event.payload().orderId());
         completeOrder(orderId);
         log.info("Order {} payment completed successfully", orderId.getValue());
-
-        idempotencyRepository.save(eventId, event.eventType());
     }
 
     @Override
@@ -146,10 +156,15 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
             return;
         }
 
+        try {
+            idempotencyRepository.save(eventId, event.eventType());
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            log.info("Event {} processed concurrently, skipping duplicate", eventId);
+            return;
+        }
+
         OrderId orderId = OrderId.of(event.payload().orderId());
         failOrder(orderId, event.payload().reason() != null ? event.payload().reason() : "Unknown payment failure");
         log.info("Order {} payment failed. Reason: {}", orderId.getValue(), event.payload().reason());
-
-        idempotencyRepository.save(eventId, event.eventType());
     }
 }

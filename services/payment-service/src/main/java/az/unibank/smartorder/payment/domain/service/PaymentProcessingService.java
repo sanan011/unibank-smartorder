@@ -64,6 +64,9 @@ public class PaymentProcessingService implements ProcessOrderPaymentUseCase {
 
         // 2. State transition
         if (payment.getStatus() == PaymentStatus.PENDING || payment.getStatus() == PaymentStatus.FAILED) {
+            if (payment.getStatus() == PaymentStatus.FAILED) {
+                payment.resetToPending();
+            }
             payment.process();
             payment = paymentRepository.save(payment);
         } else {

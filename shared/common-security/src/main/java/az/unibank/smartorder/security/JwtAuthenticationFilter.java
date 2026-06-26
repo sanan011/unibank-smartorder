@@ -35,8 +35,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 io.jsonwebtoken.Claims claims = tokenProvider.getValidatedClaims(jwt);
                 if (claims != null) {
                     String subject = claims.getSubject();
-                    if (tokenBlocklist.isBlocked(subject)) {
-                        log.warn("Attempt to use token for blocked user: {}", subject);
+                    String jti = claims.getId();
+                    if (tokenBlocklist.isBlocked(subject) || (jti != null && tokenBlocklist.isTokenBlocked(jti))) {
+                        log.warn("Attempt to use revoked token/user: {}", subject);
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token revoked");
                         return;
                     }

@@ -43,10 +43,10 @@ public class PaymentEventConsumer {
             processPaymentEventUseCase.processPaymentProcessedEvent(event);
         } catch (IllegalArgumentException e) {
             log.error("Failed to parse event map into PaymentProcessedEvent: {}", eventMap, e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Unparseable event payload", e);
         } catch (Exception e) {
             log.error("Error processing PaymentProcessedEvent", e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Error processing event", e);
         }
     }
 
@@ -69,10 +69,10 @@ public class PaymentEventConsumer {
             processPaymentEventUseCase.processPaymentFailedEvent(event);
         } catch (IllegalArgumentException e) {
             log.error("Failed to parse event map into PaymentFailedEvent: {}", eventMap, e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Unparseable event payload", e);
         } catch (Exception e) {
             log.error("Error processing PaymentFailedEvent", e);
-            throw e;
+            throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Error processing event", e);
         }
     }
 }

@@ -37,12 +37,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Testcontainers
-@ActiveProfiles("local")
-@Disabled("Requires Docker for Testcontainers")
+@ActiveProfiles("test")
 class CompensationIntegrationTest {
 
     @Container

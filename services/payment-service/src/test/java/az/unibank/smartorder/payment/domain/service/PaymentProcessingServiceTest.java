@@ -3,6 +3,8 @@ package az.unibank.smartorder.payment.domain.service;
 import az.unibank.smartorder.events.order.OrderCreatedEvent;
 import az.unibank.smartorder.events.payment.PaymentProcessedEvent;
 import az.unibank.smartorder.payment.domain.model.aggregate.Payment;
+import az.unibank.smartorder.payment.domain.model.valueobject.PaymentId;
+import az.unibank.smartorder.payment.domain.model.valueobject.PaymentStatus;
 import az.unibank.smartorder.payment.domain.port.outbound.EventPublisherPort;
 import az.unibank.smartorder.payment.domain.port.outbound.IdempotencyRepository;
 import az.unibank.smartorder.payment.domain.port.outbound.PaymentGatewayPort;
@@ -23,6 +25,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class PaymentProcessingServiceTest {
@@ -74,5 +77,35 @@ class PaymentProcessingServiceTest {
         verify(paymentGatewayPort).processPayment(eq(orderId), any());
         verify(eventPublisherPort).publish(eq("payment.processed"), any(PaymentProcessedEvent.class));
         verify(idempotencyRepository).save(eventId.toString(), "OrderCreatedEvent");
+    }
+
+    @Test
+    void processPayment_whenPaymentFailed_resetsToPendingAndProcessesSuccessfully() {
+        UUID eventId = UUID.randomUUID();
+        UUID orderId = UUID.randomUUID();
+        OrderCreatedEvent event = new OrderCreatedEvent(eventId, "OrderCreatedEvent", "1.0", null, UUID.randomUUID(), new OrderCreatedEvent.Payload(orderId, UUID.randomUUID(), List.of(), BigDecimal.TEN, "USD"));
+
+        Payment existingFailedPayment = Payment.builder()
+                .id(PaymentId.of(UUID.randomUUID()))
+                .orderId(orderId)
+                .amount(BigDecimal.TEN)
+                .currency("USD")
+                .status(PaymentStatus.FAILED)
+                .attemptCount(1)
+                .build();
+
+        when(idempotencyRepository.exists(eventId.toString())).thenReturn(false);
+        when(paymentRepository.findByOrderId(orderId)).thenReturn(Optional.of(existingFailedPayment));
+        when(paymentGatewayPort.processPayment(eq(orderId), any())).thenReturn(true);
+        when(paymentRepository.save(any(Payment.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        paymentProcessingService.processPayment(event);
+
+        verify(paymentGatewayPort).processPayment(eq(orderId), any());
+        verify(eventPublisherPort).publish(eq("payment.processed"), any(PaymentProcessedEvent.class));
+        verify(idempotencyRepository).save(eventId.toString(), "OrderCreatedEvent");
+        
+        assertThat(existingFailedPayment.getStatus()).isEqualTo(PaymentStatus.SUCCESS);
+        assertThat(existingFailedPayment.getAttemptCount()).isEqualTo(2);
     }
 }
