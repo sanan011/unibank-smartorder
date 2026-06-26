@@ -13,6 +13,7 @@ C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\domain\service\PaymentProcessingService.class
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\gateway\MockPaymentGatewayAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\gateway\PaymentGatewayException.class
+C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\messaging\config\RabbitMQConfig.class
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\messaging\consumer\OrderEventConsumer.class
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\messaging\publisher\PaymentEventPublisher.class
 C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\main\az\unibank\smartorder\payment\infrastructure\persistence\jpa\adapter\DbIdempotencyGuardAdapter.class

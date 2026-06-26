@@ -96,6 +96,7 @@ C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\ja
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\cache\RedisProductCacheAdapter$CachedProduct.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\cache\RedisProductCacheAdapter.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\adapter\RabbitMQEventPublisherAdapter.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\config\RabbitMQConfig.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumer.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\messaging\outbox\OutboxRelayService.class
 C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\main\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\DbIdempotencyGuardAdapter.class

@@ -168,6 +168,8 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\adapter\RabbitMQEventPublisherAdapter.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\config\RabbitMQConfig.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\consumer\PaymentEventConsumer.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\outbox\OutboxRelayService.java">

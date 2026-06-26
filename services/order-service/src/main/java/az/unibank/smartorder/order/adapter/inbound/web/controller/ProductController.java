@@ -39,9 +39,14 @@ public class ProductController {
     @GetMapping
     public PagedResponse<ProductResponse> listProducts(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name,asc") String sort) {
             
-        Page<Product> productPage = listProductsUseCase.listProducts(new ListProductsQuery(page, size));
+        String[] sortParams = sort.split(",");
+        String sortBy = sortParams[0];
+        String sortDirection = sortParams.length > 1 ? sortParams[1].toUpperCase() : "ASC";
+            
+        Page<Product> productPage = listProductsUseCase.listProducts(new ListProductsQuery(page, size, sortBy, sortDirection));
         
         return new PagedResponse<>(
                 productPage.getContent().stream().map(productWebMapper::toResponse).toList(),

@@ -11,6 +11,7 @@ import az.unibank.smartorder.web.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -75,7 +76,8 @@ public class ProductQueryHandlers implements GetProductUseCase, ListProductsUseC
 
     @Override
     public Page<Product> listProducts(ListProductsQuery query) {
-        return productRepository.findAll(PageRequest.of(query.getPage(), query.getSize()));
+        Sort.Direction direction = Sort.Direction.fromString(query.getSortDirection());
+        return productRepository.findAll(PageRequest.of(query.getPage(), query.getSize(), Sort.by(direction, query.getSortBy())));
     }
 }
 

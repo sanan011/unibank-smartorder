@@ -56,12 +56,16 @@ public class OutboxRelayService {
         }
     }
 
+    private static final java.util.Map<String, String> ROUTING_KEY_MAP = java.util.Map.of(
+        "OrderCreatedEvent", "order.created",
+        "OrderCancelledEvent", "order.cancelled"
+    );
+
     private String getRoutingKey(String eventType) {
-        if ("OrderCreatedEvent".equals(eventType)) {
-            return "order.created";
-        } else if ("OrderCancelledEvent".equals(eventType)) {
-            return "order.cancelled";
+        String key = ROUTING_KEY_MAP.getOrDefault(eventType, "order.unknown");
+        if ("order.unknown".equals(key)) {
+            log.warn("Unknown event type for routing: {}", eventType);
         }
-        return "order.unknown";
+        return key;
     }
 }

@@ -23,6 +23,9 @@ public class NotificationQueryHandlers implements QueryNotificationUseCase {
 
     @Override
     public List<Notification> getNotificationsByCustomerId(UUID customerId, int page, int size) {
+        if (size > 100) {
+            throw new IllegalArgumentException("Page size cannot exceed 100");
+        }
         return notificationRepository.findByCustomerId(customerId, page, size);
     }
 }
