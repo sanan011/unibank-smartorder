@@ -1,5 +1,0 @@
-C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\test\az\unibank\smartorder\payment\domain\service\PaymentProcessingServiceTest.class
-C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\test\az\unibank\smartorder\payment\infrastructure\gateway\CircuitBreakerIntegrationTest.class
-C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\test\az\unibank\smartorder\payment\infrastructure\messaging\consumer\OrderEventConsumerTest.class
-C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\test\az\unibank\smartorder\payment\infrastructure\messaging\consumer\SagaPaymentE2EIntegrationTest.class
-C:\Users\User\Desktop\unibank-smartorder\services\payment-service\build\classes\java\test\az\unibank\smartorder\payment\infrastructure\messaging\idempotency\IdempotencyIntegrationTest.class
