@@ -126,8 +126,47 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-smartorder}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-smartorder123}
+      MONGO_INITDB_DATABASE: ${MONGO_DB:-notification_db}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://smartorder:smartorder123@localhost:27017/notification_db --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  notification-service:
+    build:
+      context: ..
+      dockerfile: infrastructure/docker/notification-service.Dockerfile
+    container_name: notification-service
+    ports:
+      - "8082:8082"
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_USER:-smartorder}:${MONGO_PASSWORD:-smartorder123}@mongodb:27017/${MONGO_DB:-notification_db}?authSource=admin
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=${RABBITMQ_USER:-admin}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD:-supersecret_rmq_password}
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   postgres_payment_data:
   redis_data:
   rabbitmq_data:
+  mongodb_data:
