@@ -14,6 +14,8 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\org.flywaydb\flyway-core\10.10.
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.cloud\spring-cloud-starter-circuitbreaker-resilience4j\3.1.1\7030dffd8c2d0b00df4e661e0342e8970009f60b\spring-cloud-starter-circuitbreaker-resilience4j-3.1.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-aop\3.3.0\f160f43a3f58618c92677d249a64def02a76830c\spring-boot-starter-aop-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.mapstruct\mapstruct\1.5.5.Final\2ca3cbe39b6e9ea8d5ea521965a89bef2a1e8eeb\mapstruct-1.5.5.Final.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-registry-prometheus\1.13.0\336a1b9f35722ffbe7988603c392f1c880c16925\micrometer-registry-prometheus-1.13.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\net.logstash.logback\logstash-logback-encoder\7.4\4573c7882277096adf58dd6485f38400b028aa93\logstash-logback-encoder-7.4.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-json\3.3.0\1c9938093b372602f121e2b073f490897388cc71\spring-boot-starter-json-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-jdbc\3.3.0\d2521191455fbf05c8d5bb49f39cb6d8fcb004b\spring-boot-starter-jdbc-3.3.0.jar
@@ -29,6 +31,7 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-mess
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-actuator-autoconfigure\3.3.0\993952c505a09c13a7fd996def6dbaf3bc6b06d9\spring-boot-actuator-autoconfigure-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-jakarta9\1.13.0\5d6820df50cba9ef893bf026eacf5a6093945ac7\micrometer-jakarta9-1.13.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.cloud\spring-cloud-circuitbreaker-resilience4j\3.1.1\a95070d75c9ea27fa88598c410838706eeea2389\spring-cloud-circuitbreaker-resilience4j-3.1.1.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-core\1.13.0\d7ed656fbc54fde5a03d978fc0d66f270cc4a997\micrometer-core-1.13.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.data\spring-data-jpa\3.3.0\b1a00d814eeffd3024ddc9967b8f1e38d6f9deb7\spring-data-jpa-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-autoconfigure\3.3.0\1d98cfa94223e6a3a0e0ad301822cef90cc04fbc\spring-boot-autoconfigure-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-actuator\3.3.0\14696a25a7c6adc23836a6a1315f90bbafd23cd4\spring-boot-actuator-3.3.0.jar
@@ -37,7 +40,6 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.data\spring
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.data\spring-data-keyvalue\3.3.0\22c2f2b48cc3561b6a9661ad1a7012a3ed223981\spring-data-keyvalue-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-context-support\6.1.8\26f6bf59023b4adda9588f3715ccc65e588773ae\spring-context-support-6.1.8.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-context\6.1.8\21219a0df58e5b96ef489a172b449232573352e8\spring-context-6.1.8.jar
-C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-core\1.13.0\d7ed656fbc54fde5a03d978fc0d66f270cc4a997\micrometer-core-1.13.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-observation\1.13.0\5aa75fbb4367dc3b28e557d14535d21335dc8985\micrometer-observation-1.13.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.lettuce\lettuce-core\6.3.2.RELEASE\29b2aac09256c5fc2e9e9ad1df41c65dad5e557a\lettuce-core-6.3.2.RELEASE.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.hibernate.orm\hibernate-core\6.5.2.Final\e9e0cc47f6cd2b2553968aee66bd9e55e7485221\hibernate-core-6.5.2.Final.jar
@@ -57,6 +59,8 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\io.github.resilience4j\resilien
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.github.resilience4j\resilience4j-timelimiter\2.1.0\326f89e40ee01f9f235f67efd137dcedf3da1dc4\resilience4j-timelimiter-2.1.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-aop\6.1.8\ef793a21e405a88d9d32b92cb459c845ee12b271\spring-aop-6.1.8.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.aspectj\aspectjweaver\1.9.22\10736ab74a53af5e2e1b07e76335a5391526b6f8\aspectjweaver-1.9.22.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-core\1.2.1\362330b5934a128e91e331f1497cd275fec1a81c\prometheus-metrics-core-1.2.1.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-tracer-common\1.2.1\74cc4ac3226a3937d6e5c74c06454258e7901cec\prometheus-metrics-tracer-common-1.2.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-logging\3.3.0\79a400c9d7ce3a7cecf296fda402e3100a099bce\spring-boot-starter-logging-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\jakarta.annotation\jakarta.annotation-api\2.1.1\48b9bda22b091b1f48b13af03fe36db3be6e1ae3\jakarta.annotation-api-2.1.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-orm\6.1.8\f66e4c27c29f939083a164513b90ebf7109e76d1\spring-orm-6.1.8.jar
@@ -98,6 +102,8 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.security\sp
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.github.resilience4j\resilience4j-ratelimiter\2.1.0\48dff23ede5fef4bdbc6ade6e7b27c86a96f59e8\resilience4j-ratelimiter-2.1.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.github.resilience4j\resilience4j-retry\2.1.0\afaad85737e3ae522ef3161bef4ac8d557e5c95b\resilience4j-retry-2.1.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.github.resilience4j\resilience4j-core\2.1.0\edebba65e2778e666a5e0832ee3210f85d1c2873\resilience4j-core-2.1.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-model\1.2.1\99caac1a3f974de6bc9882fbf6a09ea055733c7b\prometheus-metrics-model-1.2.1.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-config\1.2.1\bcccb14176161671c4cb858b0ca50d680237fdbe\prometheus-metrics-config-1.2.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-jcl\6.1.8\a545266a6efac9283353a922783a0a06f197ec0\spring-jcl-6.1.8.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.retry\spring-retry\2.0.6\812ca80eb5f418c679cb239d2d009c4bf075f3a\spring-retry-2.0.6.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.reactivestreams\reactive-streams\1.0.4\3864a1320d97d7b045f729a326e1e077661f31b7\reactive-streams-1.0.4.jar

@@ -51,8 +51,9 @@ class LogoutIntegrationTest {
     @Test
     void shouldRejectTokenAfterLogoutAndAcceptNewToken() throws Exception {
         // Arrange - generate two valid tokens
+        UUID userId = UUID.randomUUID();
         az.unibank.smartorder.security.UserPrincipal principal = new az.unibank.smartorder.security.UserPrincipal(
-                UUID.randomUUID(), "test@test.com", "USER");
+                userId, "test@unibank.az", "password", "ROLE_CUSTOMER", false);
         String token1 = jwtTokenProvider.generateToken(principal);
         String token2 = jwtTokenProvider.generateToken(principal);
 

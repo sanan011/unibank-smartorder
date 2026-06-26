@@ -10,10 +10,13 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-security\3.3.0\2d20fb8d3b186343c689a16bd26798cb32309c8\spring-boot-starter-security-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-validation\3.3.0\567b0ee4be72f0888addbbb52f66979d5e6ecf1\spring-boot-starter-validation-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-actuator\3.3.0\768a4f4e20c529f08e241b3ab5b316ab0567c30\spring-boot-starter-actuator-3.3.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-api\0.12.5\ea8243e36f16c2834ad69a048ed8a24aa9dd3e79\jjwt-api-0.12.5.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.flywaydb\flyway-database-postgresql\10.10.0\18de19775a0ed33119d1a0c60278e35ecd168543\flyway-database-postgresql-10.10.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.flywaydb\flyway-core\10.10.0\8761d308b9fc9697a95ae362bcbbb5abe8f6e08f\flyway-core-10.10.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springdoc\springdoc-openapi-starter-webmvc-ui\2.5.0\e81e60e9be9fd65503071337e634b6056127a2fb\springdoc-openapi-starter-webmvc-ui-2.5.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.mapstruct\mapstruct\1.5.5.Final\2ca3cbe39b6e9ea8d5ea521965a89bef2a1e8eeb\mapstruct-1.5.5.Final.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-registry-prometheus\1.13.0\336a1b9f35722ffbe7988603c392f1c880c16925\micrometer-registry-prometheus-1.13.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\net.logstash.logback\logstash-logback-encoder\7.4\4573c7882277096adf58dd6485f38400b028aa93\logstash-logback-encoder-7.4.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.2\25ea2e8b0c338a877313bd4672d3fe056ea78f0d\jsr305-3.0.2.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-json\3.3.0\1c9938093b372602f121e2b073f490897388cc71\spring-boot-starter-json-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-aop\3.3.0\f160f43a3f58618c92677d249a64def02a76830c\spring-boot-starter-aop-3.3.0.jar
@@ -59,6 +62,8 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jack
 C:\Users\User\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.dataformat\jackson-dataformat-toml\2.17.1\430269726ae331661a3b53a7da9440fd05d1636\jackson-dataformat-toml-2.17.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.10.1\b3add478d4382b78ea20b1671390a858002feb6c\gson-2.10.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.webjars\swagger-ui\5.13.0\262a148333ae8c7fd0e23606855ec516e473efd\swagger-ui-5.13.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-core\1.2.1\362330b5934a128e91e331f1497cd275fec1a81c\prometheus-metrics-core-1.2.1.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-tracer-common\1.2.1\74cc4ac3226a3937d6e5c74c06454258e7901cec\prometheus-metrics-tracer-common-1.2.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-logging\3.3.0\79a400c9d7ce3a7cecf296fda402e3100a099bce\spring-boot-starter-logging-3.3.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\jakarta.annotation\jakarta.annotation-api\2.1.1\48b9bda22b091b1f48b13af03fe36db3be6e1ae3\jakarta.annotation-api-2.1.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-orm\6.1.8\f66e4c27c29f939083a164513b90ebf7109e76d1\spring-orm-6.1.8.jar
@@ -95,6 +100,8 @@ C:\Users\User\.gradle\caches\modules-2\files-2.1\jakarta.validation\jakarta.vali
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.jboss.logging\jboss-logging\3.5.3.Final\c88fc1d8a96d4c3491f55d4317458ccad53ca663\jboss-logging-3.5.3.Final.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\com.fasterxml\classmate\1.7.0\e98374da1f2143ac8e6e0a95036994bb19137a3\classmate-1.7.0.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\io.micrometer\micrometer-commons\1.13.0\156a59aff8d72c5e631eb4a2d739373ed5881609\micrometer-commons-1.13.0.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-model\1.2.1\99caac1a3f974de6bc9882fbf6a09ea055733c7b\prometheus-metrics-model-1.2.1.jar
+C:\Users\User\.gradle\caches\modules-2\files-2.1\io.prometheus\prometheus-metrics-config\1.2.1\bcccb14176161671c4cb858b0ca50d680237fdbe\prometheus-metrics-config-1.2.1.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework\spring-jcl\6.1.8\a545266a6efac9283353a922783a0a06f197ec0\spring-jcl-6.1.8.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.reactivestreams\reactive-streams\1.0.4\3864a1320d97d7b045f729a326e1e077661f31b7\reactive-streams-1.0.4.jar
 C:\Users\User\.gradle\caches\modules-2\files-2.1\org.springframework.retry\spring-retry\2.0.6\812ca80eb5f418c679cb239d2d009c4bf075f3a\spring-retry-2.0.6.jar

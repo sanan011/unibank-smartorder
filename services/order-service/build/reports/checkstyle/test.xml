@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.15.0">
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\identity\adapter\inbound\web\LogoutIntegrationTest.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\adapter\inbound\web\filter\RateLimitIntegrationTest.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\test\java\az\unibank\smartorder\order\application\handler\CompensationIntegrationTest.java">
