@@ -49,4 +49,15 @@ public class UserJpaEntity {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
+
+    @org.springframework.data.annotation.CreatedBy
+    @Column(name = "created_by", updatable = false)
+    private String createdBy;
+
+    @org.springframework.data.annotation.LastModifiedBy
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    @jakarta.persistence.Version
+    private Long version;
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.15.0">
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\gateway\MockPaymentGatewayAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\gateway\PaymentGatewayException.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\infrastructure\messaging\consumer\OrderEventConsumer.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\payment-service\src\main\java\az\unibank\smartorder\payment\PaymentApplication.java">
+</file>
+</checkstyle>

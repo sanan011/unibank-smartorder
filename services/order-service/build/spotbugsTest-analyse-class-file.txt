@@ -1,0 +1,2 @@
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\adapter\inbound\web\filter\RateLimitIntegrationTest.class
+C:\Users\User\Desktop\unibank-smartorder\services\order-service\build\classes\java\test\az\unibank\smartorder\order\application\handler\ProductQueryHandlersTest.class

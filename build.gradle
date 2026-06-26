@@ -45,6 +45,8 @@ subprojects {
         testCompileOnly 'org.projectlombok:lombok'
         testAnnotationProcessor 'org.projectlombok:lombok'
         
+        compileOnly 'com.github.spotbugs:spotbugs-annotations:4.8.4'
+        
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 

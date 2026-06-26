@@ -19,6 +19,9 @@ public class User {
     private boolean active;
     private final Instant createdAt;
     private Instant updatedAt;
+    private String createdBy;
+    private String updatedBy;
+    private Long version;
 
     public static User create(Email email, PasswordHash passwordHash, Role role) {
         Instant now = Instant.now();

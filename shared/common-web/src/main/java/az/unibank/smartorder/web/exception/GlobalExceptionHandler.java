@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBusiness(BusinessException ex, WebRequest request) {
         log.warn("Business rule violation: code={}, message={}", ex.getCode(), ex.getMessage());
         return ResponseEntity.status(ex.getHttpStatus())
-            .body(ErrorResponse.of(ex.getCode(), ex.getMessage(), request));
+            .body(ErrorResponse.of(ex.getHttpStatus(), ex.getCode(), ex.getMessage(), request));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -33,7 +33,11 @@ public class JwtTokenProvider {
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        if (keyBytes.length < 64) {
+            throw new IllegalArgumentException("JWT_SECRET must be at least 512 bits (64 bytes) long for HS512");
+        }
+        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(UserPrincipal userPrincipal) {
@@ -47,7 +51,7 @@ public class JwtTokenProvider {
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .id(UUID.randomUUID().toString())
-                .signWith(key)
+                .signWith(key, Jwts.SIG.HS512)
                 .compact();
     }
 
@@ -60,28 +64,18 @@ public class JwtTokenProvider {
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .id(UUID.randomUUID().toString())
-                .signWith(key)
+                .signWith(key, Jwts.SIG.HS512)
                 .compact();
     }
 
     public UUID getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(key)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-
-        return UUID.fromString(claims.getSubject());
+        Claims claims = getValidatedClaims(token);
+        return claims != null ? UUID.fromString(claims.getSubject()) : null;
     }
 
     public String getRoleFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .verifyWith(key)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-
-        return claims.get("role", String.class);
+        Claims claims = getValidatedClaims(token);
+        return claims != null ? claims.get("role", String.class) : null;
     }
 
     public String getJtiFromJWT(String token) {
@@ -102,9 +96,12 @@ public class JwtTokenProvider {
     }
 
     public boolean validateToken(String authToken) {
+        return getValidatedClaims(authToken) != null;
+    }
+
+    public Claims getValidatedClaims(String token) {
         try {
-            Jwts.parser().verifyWith(key).build().parseSignedClaims(authToken);
-            return true;
+            return Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
@@ -116,6 +113,6 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException ex) {
             log.error("JWT claims string is empty.");
         }
-        return false;
+        return null;
     }
 }

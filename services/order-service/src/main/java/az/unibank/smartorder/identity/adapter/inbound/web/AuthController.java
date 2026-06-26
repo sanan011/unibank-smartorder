@@ -7,10 +7,12 @@ import az.unibank.smartorder.identity.adapter.inbound.web.dto.RegisterRequest;
 import az.unibank.smartorder.identity.application.command.LoginCommand;
 import az.unibank.smartorder.identity.application.command.RefreshCommand;
 import az.unibank.smartorder.identity.application.command.RegisterCommand;
+import az.unibank.smartorder.identity.domain.model.TokenPair;
 import az.unibank.smartorder.identity.domain.port.inbound.AuthenticateUserUseCase;
 import az.unibank.smartorder.identity.domain.port.inbound.RefreshTokenUseCase;
 import az.unibank.smartorder.identity.domain.port.inbound.RegisterUserUseCase;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,20 +32,30 @@ public class AuthController {
     private final RefreshTokenUseCase refreshUseCase;
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterRequest request) {
         registerUseCase.register(new RegisterCommand(request.getEmail(), request.getPassword(), request.getRole()));
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "User registered successfully"));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
-        AuthResponse response = authenticateUseCase.authenticate(new LoginCommand(request.getEmail(), request.getPassword()));
-        return ResponseEntity.ok(response);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        TokenPair tokenPair = authenticateUseCase.authenticate(new LoginCommand(request.getEmail(), request.getPassword()));
+        return ResponseEntity.ok(AuthResponse.builder()
+                .accessToken(tokenPair.getAccessToken())
+                .refreshToken(tokenPair.getRefreshToken())
+                .expiresIn(tokenPair.getExpiresIn())
+                .tokenType("Bearer")
+                .build());
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshRequest request) {
-        AuthResponse response = refreshUseCase.refresh(new RefreshCommand(request.getRefreshToken()));
-        return ResponseEntity.ok(response);
+    public ResponseEntity<AuthResponse> refresh(@Valid @RequestBody RefreshRequest request) {
+        TokenPair tokenPair = refreshUseCase.refresh(new RefreshCommand(request.getRefreshToken()));
+        return ResponseEntity.ok(AuthResponse.builder()
+                .accessToken(tokenPair.getAccessToken())
+                .refreshToken(tokenPair.getRefreshToken())
+                .expiresIn(tokenPair.getExpiresIn())
+                .tokenType("Bearer")
+                .build());
     }
 }

@@ -6,9 +6,13 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\adapter\inbound\web\dto\LoginRequest.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\adapter\inbound\web\dto\PasswordConstraintValidator.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\adapter\inbound\web\dto\RefreshRequest.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\adapter\inbound\web\dto\RegisterRequest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\adapter\inbound\web\dto\ValidPassword.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\application\command\LoginCommand.java">
 </file>
@@ -19,6 +23,8 @@
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\event\UserRegisteredEvent.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\model\aggregate\User.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\model\TokenPair.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\model\valueobject\Email.java">
 </file>
@@ -34,13 +40,19 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\port\inbound\RegisterUserUseCase.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\port\outbound\LoginAttemptRepository.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\port\outbound\RefreshTokenRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\port\outbound\UserRepository.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\domain\service\AuthDomainService.java">
 </file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\infrastructure\cache\RedisLoginAttemptAdapter.java">
+</file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\infrastructure\cache\RedisRefreshTokenAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\infrastructure\cache\RedisTokenBlocklist.java">
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\infrastructure\persistence\adapter\UserPersistenceAdapter.java">
 </file>
@@ -50,6 +62,132 @@
 </file>
 <file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\identity\infrastructure\persistence\jpa\repository\UserJpaRepository.java">
 </file>
-<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\OrderServiceApplication.java">
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\controller\OrderController.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\controller\ProductController.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\request\CreateOrderRequest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\request\OrderItemRequest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\request\UpdateStockRequest.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\response\OrderItemResponse.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\response\OrderResponse.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\response\PagedResponse.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\dto\response\ProductResponse.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\filter\RateLimitFilter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\mapper\OrderWebMapper.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\adapter\inbound\web\mapper\ProductWebMapper.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\command\CancelOrderCommand.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\command\CreateOrderCommand.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\command\UpdateStockCommand.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\handler\OrderCommandHandlers.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\handler\OrderQueryHandlers.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\handler\ProductCommandHandlers.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\handler\ProductQueryHandlers.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\query\GetOrderQuery.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\query\ListOrdersQuery.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\application\query\ListProductsQuery.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\aggregate\Order.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\aggregate\Product.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\entity\OrderItem.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\CustomerId.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\Money.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\OrderId.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\OrderStatus.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\ProductId.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\model\valueobject\StockQuantity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\CancelOrderUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\CreateOrderUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\GetOrderUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\GetProductUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\ListOrdersUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\ListProductsUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\inbound\UpdateStockUseCase.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\EventPublisher.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\OrderRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\OutboxRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\ProductCacheRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\port\outbound\ProductRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\service\OrderCancellationService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\service\OrderCreationService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\domain\service\StockReservationService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\cache\CacheWarmupService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\cache\RedisProductCacheAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\adapter\RabbitMQEventPublisherAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\messaging\outbox\OutboxRelayService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OrderPersistenceAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\OutboxPersistenceAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\adapter\ProductPersistenceAdapter.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderItemJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OrderJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\OutboxEventJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\entity\ProductJpaEntity.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\mapper\OrderPersistenceMapper.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\mapper\ProductPersistenceMapper.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OrderJpaRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\OutboxJpaRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\persistence\jpa\repository\ProductJpaRepository.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\order\infrastructure\ratelimit\RedisRateLimiterService.java">
+</file>
+<file name="C:\Users\User\Desktop\unibank-smartorder\services\order-service\src\main\java\az\unibank\smartorder\OrderServiceApplication.java">
 </file>
 </checkstyle>

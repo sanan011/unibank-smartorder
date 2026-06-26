@@ -20,6 +20,9 @@ public class UserPersistenceMapper {
                 .active(domain.isActive())
                 .createdAt(domain.getCreatedAt())
                 .updatedAt(domain.getUpdatedAt())
+                .createdBy(domain.getCreatedBy())
+                .updatedBy(domain.getUpdatedBy())
+                .version(domain.getVersion())
                 .build();
     }
 
@@ -32,6 +35,9 @@ public class UserPersistenceMapper {
                 .active(entity.isActive())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
+                .createdBy(entity.getCreatedBy())
+                .updatedBy(entity.getUpdatedBy())
+                .version(entity.getVersion())
                 .build();
     }
 }

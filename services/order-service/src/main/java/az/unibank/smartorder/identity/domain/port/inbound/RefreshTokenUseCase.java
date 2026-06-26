@@ -1,8 +1,8 @@
 package az.unibank.smartorder.identity.domain.port.inbound;
 
-import az.unibank.smartorder.identity.adapter.inbound.web.dto.AuthResponse;
 import az.unibank.smartorder.identity.application.command.RefreshCommand;
+import az.unibank.smartorder.identity.domain.model.TokenPair;
 
 public interface RefreshTokenUseCase {
-    AuthResponse refresh(RefreshCommand command);
+    TokenPair refresh(RefreshCommand command);
 }

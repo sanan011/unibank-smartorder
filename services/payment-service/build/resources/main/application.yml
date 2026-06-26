@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: payment-service
+  profiles:
+    active: local
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:admin}
+    password: ${RABBITMQ_PASSWORD:supersecret_rmq_password}
+
+jwt:
+  secret: ${JWT_SECRET:super_secret_jwt_key_that_is_long_enough_for_hs512_which_needs_to_be_at_least_512_bits}
+  expiration:
+    access: 3600000
+    refresh: 604800000
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus, metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 3
+        permittedNumberOfCallsInHalfOpenState: 2
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+    instances:
+      paymentGateway:
+        baseConfig: default
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - az.unibank.smartorder.payment.infrastructure.gateway.PaymentGatewayException
+    instances:
+      paymentGateway:
+        baseConfig: default

@@ -23,6 +23,7 @@ import java.util.UUID;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider tokenProvider;
+    private final TokenBlocklist tokenBlocklist;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -30,15 +31,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = getJwtFromRequest(request);
 
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                UUID userId = tokenProvider.getUserIdFromJWT(jwt);
-                String role = tokenProvider.getRoleFromJWT(jwt);
+            if (StringUtils.hasText(jwt)) {
+                io.jsonwebtoken.Claims claims = tokenProvider.getValidatedClaims(jwt);
+                if (claims != null) {
+                    String subject = claims.getSubject();
+                    if (tokenBlocklist.isBlocked(subject)) {
+                        log.warn("Attempt to use token for blocked user: {}", subject);
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token revoked");
+                        return;
+                    }
 
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userId, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    UUID userId = UUID.fromString(subject);
+                    String role = claims.get("role", String.class);
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userId, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
             }
         } catch (Exception ex) {
             log.error("Could not set user authentication in security context", ex);

@@ -37,11 +37,11 @@ public class ErrorResponse {
         return details == null ? null : List.copyOf(details);
     }
 
-    public static ErrorResponse of(String code, String message, WebRequest request) {
+    public static ErrorResponse of(int status, String code, String message, WebRequest request) {
         return ErrorResponse.builder()
                 .timestamp(Instant.now())
-                .status(400)
-                .error("Bad Request")
+                .status(status)
+                .error(org.springframework.http.HttpStatus.valueOf(status).getReasonPhrase())
                 .code(code)
                 .message(message)
                 .correlationId(MDC.get("correlationId"))
