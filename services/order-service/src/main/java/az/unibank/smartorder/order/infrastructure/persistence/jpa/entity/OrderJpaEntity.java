@@ -54,7 +54,7 @@ public class OrderJpaEntity {
     private Long version;
 
     @CreatedDate
-    @Column(name = "created_at")
+    @Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
     @LastModifiedDate

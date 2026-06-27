@@ -34,6 +34,7 @@ public class OutboxEventJpaEntity {
     @Column(name = "event_type")
     private String eventType;
 
+    @Column(name = "payload", columnDefinition = "jsonb", nullable = false)
     private String payload;
 
     private String status;
