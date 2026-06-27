@@ -74,12 +74,11 @@ class SagaPaymentE2EIntegrationTest {
     void shouldProcessOrderCreatedEventAndCreatePayment() {
         // 1. Order Created Event received
         UUID orderId = UUID.randomUUID();
-        UUID customerId = UUID.randomUUID();
         OrderCreatedEvent event = new OrderCreatedEvent(
                 orderId,
                 new OrderCreatedEvent.Payload(
                         orderId,
-                        customerId,
+                        UUID.randomUUID(),
                         List.of(),
                         new BigDecimal("250.00"),
                         "USD"
