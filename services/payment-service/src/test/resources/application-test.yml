@@ -1,0 +1,14 @@
+# Minimal test profile configuration for payment-service integration tests.
+# All datasource/rabbitmq connection properties are overridden via @DynamicPropertySource
+# in individual test classes using Testcontainers.
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true

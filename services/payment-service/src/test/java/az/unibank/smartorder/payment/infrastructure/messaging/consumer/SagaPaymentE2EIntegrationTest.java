@@ -5,7 +5,6 @@ import az.unibank.smartorder.payment.domain.model.aggregate.Payment;
 import az.unibank.smartorder.payment.domain.port.outbound.PaymentRepository;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.repository.ProcessedEventJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +18,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.messaging.handler.annotation.Payload;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +84,7 @@ class SagaPaymentE2EIntegrationTest {
         );
 
         // 2. Consume Event
+        @SuppressWarnings("unchecked")
         Map<String, Object> eventMap = objectMapper.convertValue(event, Map.class);
         orderEventConsumer.onOrderCreated(eventMap);
 
