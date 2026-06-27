@@ -5,6 +5,7 @@ import az.unibank.smartorder.payment.domain.model.entity.PaymentTransaction;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.entity.PaymentJpaEntity;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.entity.PaymentTransactionJpaEntity;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -20,6 +21,13 @@ public interface PaymentPersistenceMapper {
     default void linkTransactions(@MappingTarget PaymentJpaEntity paymentJpaEntity) {
         if (paymentJpaEntity.getTransactions() != null) {
             paymentJpaEntity.getTransactions().forEach(tx -> tx.setPayment(paymentJpaEntity));
+        }
+    }
+
+    @BeforeMapping
+    default void fixParentReferences(PaymentJpaEntity entity) {
+        if (entity != null && entity.getTransactions() != null) {
+            entity.getTransactions().forEach(tx -> tx.setPayment(entity));
         }
     }
 
