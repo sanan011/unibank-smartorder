@@ -86,7 +86,12 @@ class SagaPaymentE2EIntegrationTest {
         // 2. Consume Event
         @SuppressWarnings("unchecked")
         Map<String, Object> eventMap = objectMapper.convertValue(event, Map.class);
-        orderEventConsumer.onOrderCreated(eventMap);
+        try {
+            orderEventConsumer.onOrderCreated(eventMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
 
         // 3. Verify Payment is processed and saved
         Optional<Payment> paymentOpt = paymentRepository.findByOrderId(orderId);

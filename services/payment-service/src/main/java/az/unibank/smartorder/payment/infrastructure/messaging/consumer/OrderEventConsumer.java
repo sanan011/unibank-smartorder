@@ -44,7 +44,7 @@ public class OrderEventConsumer {
             log.error("Failed to parse event map into OrderCreatedEvent: {}", eventMap, e);
             throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Unparseable event payload", e);
         } catch (Exception e) {
-            log.error("Error processing OrderCreatedEvent", e);
+            log.error("Error processing event", e);
             throw new org.springframework.amqp.AmqpRejectAndDontRequeueException("Error processing event", e);
         }
     }
