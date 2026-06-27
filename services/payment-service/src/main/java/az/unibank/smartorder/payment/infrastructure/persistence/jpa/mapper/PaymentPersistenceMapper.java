@@ -15,13 +15,14 @@ import org.mapstruct.ReportingPolicy;
 public interface PaymentPersistenceMapper {
 
     @Mapping(target = "id", source = "id.value")
-    PaymentJpaEntity toJpaEntity(Payment payment);
+    PaymentJpaEntity toJpaEntityInternal(Payment payment);
 
-    @AfterMapping
-    default void linkTransactions(@MappingTarget PaymentJpaEntity paymentJpaEntity) {
-        if (paymentJpaEntity.getTransactions() != null) {
-            paymentJpaEntity.getTransactions().forEach(tx -> tx.setPayment(paymentJpaEntity));
+    default PaymentJpaEntity toJpaEntity(Payment payment) {
+        PaymentJpaEntity entity = toJpaEntityInternal(payment);
+        if (entity != null && entity.getTransactions() != null) {
+            entity.getTransactions().forEach(tx -> tx.setPayment(entity));
         }
+        return entity;
     }
 
     @BeforeMapping
