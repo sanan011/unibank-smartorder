@@ -26,6 +26,10 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import static org.awaitility.Awaitility.await;
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @Testcontainers
 @ActiveProfiles("test")
@@ -52,7 +56,7 @@ class SagaPaymentE2EIntegrationTest {
     }
 
     @Autowired
-    private OrderEventConsumer orderEventConsumer;
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -69,7 +73,7 @@ class SagaPaymentE2EIntegrationTest {
     }
 
     @Test
-    void shouldProcessOrderCreatedEventAndCreatePayment() {
+    void shouldProcessOrderCreatedEventAndCreatePayment() throws Exception {
         // 1. Order Created Event received
         UUID orderId = UUID.randomUUID();
         OrderCreatedEvent event = new OrderCreatedEvent(
@@ -83,26 +87,25 @@ class SagaPaymentE2EIntegrationTest {
                 )
         );
 
-        // 2. Consume Event
-        @SuppressWarnings("unchecked")
-        Map<String, Object> eventMap = objectMapper.convertValue(event, Map.class);
-        try {
-            orderEventConsumer.onOrderCreated(eventMap);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
+        // 2. Publish event via RabbitTemplate
+        rabbitTemplate.convertAndSend(
+                "smartorder.events", 
+                "order.created", 
+                objectMapper.writeValueAsString(event)
+        );
 
-        // 3. Verify Payment is processed and saved
-        Optional<Payment> paymentOpt = paymentRepository.findByOrderId(orderId);
-        assertThat(paymentOpt).isPresent();
-        Payment payment = paymentOpt.get();
-        assertThat(payment.getAmount()).isEqualByComparingTo(new BigDecimal("250.00"));
-        
-        // Ensure state is correctly processed (SUCCESS or FAILED, mostly SUCCESS in tests based on mock gateway)
-        assertThat(payment.getTransactions()).isNotEmpty();
+        // 3. Wait for async processing and verify Payment is saved
+        await().atMost(10, SECONDS).untilAsserted(() -> {
+            Optional<Payment> paymentOpt = paymentRepository.findByOrderId(orderId);
+            assertThat(paymentOpt).isPresent();
+            Payment payment = paymentOpt.get();
+            assertThat(payment.getAmount()).isEqualByComparingTo(new BigDecimal("250.00"));
+            
+            // Ensure state is correctly processed (SUCCESS or FAILED, mostly SUCCESS in tests based on mock gateway)
+            assertThat(payment.getTransactions()).isNotEmpty();
 
-        // 4. Verify processed_events inserted for idempotency
-        assertThat(processedEventRepository.findById(event.eventId())).isPresent();
+            // 4. Verify processed_events inserted for idempotency
+            assertThat(processedEventRepository.findById(event.eventId())).isPresent();
+        });
     }
 }
