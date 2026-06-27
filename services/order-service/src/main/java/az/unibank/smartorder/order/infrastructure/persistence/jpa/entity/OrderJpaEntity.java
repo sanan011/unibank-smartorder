@@ -10,7 +10,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Version;
 import jakarta.persistence.EntityListeners;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,9 +53,11 @@ public class OrderJpaEntity {
     @Version
     private Long version;
 
+    @CreatedDate
     @Column(name = "created_at")
     private Instant createdAt;
 
+    @LastModifiedDate
     @Column(name = "updated_at")
     private Instant updatedAt;
 
