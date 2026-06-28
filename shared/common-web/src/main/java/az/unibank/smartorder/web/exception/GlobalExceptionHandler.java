@@ -30,7 +30,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, WebRequest request) throws Exception {
+        if (ex.getClass().getName().contains("AccessDeniedException") || ex.getClass().getName().contains("AuthorizationDeniedException")) {
+            throw ex;
+        }
         log.error("Unhandled exception", ex);
         return ResponseEntity.internalServerError()
             .body(ErrorResponse.internal(request));

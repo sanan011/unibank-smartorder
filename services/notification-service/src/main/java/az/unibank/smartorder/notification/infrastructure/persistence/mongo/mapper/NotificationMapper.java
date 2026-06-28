@@ -1,12 +1,10 @@
 package az.unibank.smartorder.notification.infrastructure.persistence.mongo.mapper;
 
 import az.unibank.smartorder.notification.domain.model.aggregate.Notification;
-import az.unibank.smartorder.notification.domain.model.valueobject.NotificationId;
 import az.unibank.smartorder.notification.infrastructure.persistence.mongo.entity.NotificationDocument;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.UUID;
 
 @Mapper(componentModel = "spring")
 public interface NotificationMapper {

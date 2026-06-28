@@ -1,8 +1,6 @@
 package az.unibank.smartorder.identity.adapter.inbound.web;
 
-import az.unibank.smartorder.identity.adapter.inbound.web.dto.LoginRequest;
 import az.unibank.smartorder.identity.application.command.LoginCommand;
-import az.unibank.smartorder.identity.domain.model.TokenPair;
 import az.unibank.smartorder.identity.domain.port.inbound.AuthenticateUserUseCase;
 import az.unibank.smartorder.identity.domain.port.inbound.RefreshTokenUseCase;
 import az.unibank.smartorder.identity.domain.port.inbound.RegisterUserUseCase;

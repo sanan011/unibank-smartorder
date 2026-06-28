@@ -4,7 +4,6 @@ import az.unibank.smartorder.events.order.OrderCreatedEvent;
 import az.unibank.smartorder.payment.domain.port.inbound.ProcessOrderPaymentUseCase;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.repository.ProcessedEventJpaRepository;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.repository.PaymentJpaRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,7 @@ import org.junit.jupiter.api.Disabled;
 class IdempotencyIntegrationTest {
 
     @Container
+    @SuppressWarnings("resource")
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine")
             .withDatabaseName("payment_db")
             .withUsername("payment_user")
@@ -62,9 +62,6 @@ class IdempotencyIntegrationTest {
 
     @Autowired
     private PaymentJpaRepository paymentRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {

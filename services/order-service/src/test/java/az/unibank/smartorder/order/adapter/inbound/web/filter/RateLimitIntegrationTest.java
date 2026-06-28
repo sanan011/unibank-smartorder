@@ -1,6 +1,5 @@
 package az.unibank.smartorder.order.adapter.inbound.web.filter;
 
-import az.unibank.smartorder.order.infrastructure.ratelimit.RedisRateLimiterService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

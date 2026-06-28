@@ -4,11 +4,9 @@ import az.unibank.smartorder.payment.domain.model.aggregate.Payment;
 import az.unibank.smartorder.payment.domain.model.entity.PaymentTransaction;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.entity.PaymentJpaEntity;
 import az.unibank.smartorder.payment.infrastructure.persistence.jpa.entity.PaymentTransactionJpaEntity;
-import org.mapstruct.AfterMapping;
 import org.mapstruct.BeforeMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)

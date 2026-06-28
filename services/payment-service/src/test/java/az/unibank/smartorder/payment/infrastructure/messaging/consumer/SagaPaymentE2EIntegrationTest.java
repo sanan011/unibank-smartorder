@@ -29,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class SagaPaymentE2EIntegrationTest {
 
     @Container
+    @SuppressWarnings("resource")
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15-alpine")
             .withDatabaseName("payment_db")
             .withUsername("payment_user")
