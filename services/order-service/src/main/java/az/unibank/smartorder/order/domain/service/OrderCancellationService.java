@@ -20,7 +20,6 @@ public class OrderCancellationService {
     private final ProductRepository productRepository;
     private final OutboxRepository outboxRepository;
 
-    @Transactional
     public Order cancelOrder(Order order) {
         order.cancel();
 

@@ -39,6 +39,11 @@ subprojects {
         }
     }
 
+    // Override the Spring Boot 3.3.0 BOM's Testcontainers version (1.19.8 / docker-java 3.3.6),
+    // which fails with HTTP 400 on /info against modern Docker Engine APIs (Docker Desktop 4.75+,
+    // API 1.54). 1.21.3 bundles a newer docker-java that negotiates the engine API correctly.
+    ext['testcontainers.version'] = '1.21.3'
+
     dependencies {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
@@ -52,6 +57,24 @@ subprojects {
 
     test {
         useJUnitPlatform()
+
+        // Local Docker Desktop (Windows) workaround for Testcontainers.
+        // This Docker Desktop build rejects docker-java's requests over the named pipe with HTTP 400,
+        // and docker-java requests an API version newer than the engine's max (also HTTP 400). So locally
+        // we point Testcontainers at the TCP endpoint (Settings > General > "Expose daemon on
+        // tcp://localhost:2375 without TLS") and pin the API version to the engine's max.
+        // On CI / Linux / macOS, Docker is reachable via the default socket, so we skip the override
+        // entirely and let Testcontainers auto-detect. Setting DOCKER_HOST yourself also opts out.
+        boolean onWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+        boolean dockerHostSet = System.getenv('DOCKER_HOST') != null
+        boolean onCi = System.getenv('CI') != null
+        if (onWindows && !dockerHostSet && !onCi) {
+            systemProperty 'docker.host', 'tcp://localhost:2375'
+            environment 'DOCKER_HOST', 'tcp://localhost:2375'
+            systemProperty 'api.version', '1.54'
+            environment 'DOCKER_API_VERSION', '1.54'
+            environment 'TESTCONTAINERS_RYUK_DISABLED', 'true'
+        }
     }
     
     checkstyle {

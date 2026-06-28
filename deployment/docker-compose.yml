@@ -140,7 +140,7 @@ services:
     volumes:
       - mongodb_data:/data/db
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://smartorder:smartorder123@localhost:27017/notification_db --quiet
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb://smartorder:smartorder123@localhost:27017/notification_db?authSource=admin --quiet
       interval: 10s
       timeout: 5s
       retries: 5

@@ -16,6 +16,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -38,6 +40,8 @@ public class ProductJpaEntity {
 
     private BigDecimal price;
 
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 3)
     private String currency;
 
     @Column(name = "stock_quantity")

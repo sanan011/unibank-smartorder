@@ -58,6 +58,8 @@ class CompensationIntegrationTest {
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.rabbitmq.host", rabbitmq::getHost);
         registry.add("spring.rabbitmq.port", rabbitmq::getAmqpPort);
+        registry.add("spring.rabbitmq.username", rabbitmq::getAdminUsername);
+        registry.add("spring.rabbitmq.password", rabbitmq::getAdminPassword);
     }
 
     @Autowired
@@ -107,8 +109,11 @@ class CompensationIntegrationTest {
         orderRepository.save(order);
 
         // We simulate that the stock was reduced by 2 at creation time. We manually reduce it now.
-        product.decreaseStock(2);
-        productRepository.save(product);
+        // Reload first so the aggregate carries its persisted @Version; saving the original builder-made
+        // instance (version=null) would be treated as new and fail with a duplicate-key violation.
+        Product reloadedProduct = productRepository.findById(ProductId.of(productId)).orElseThrow();
+        reloadedProduct.decreaseStock(2);
+        productRepository.save(reloadedProduct);
         assertThat(productRepository.findById(ProductId.of(productId)).get().getStockQuantity().getValue()).isEqualTo(8);
 
         // Compensation event

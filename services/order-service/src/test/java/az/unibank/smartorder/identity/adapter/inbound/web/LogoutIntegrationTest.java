@@ -4,6 +4,8 @@ import az.unibank.smartorder.identity.adapter.inbound.web.dto.LoginRequest;
 import az.unibank.smartorder.identity.application.command.LoginCommand;
 import az.unibank.smartorder.identity.domain.model.TokenPair;
 import az.unibank.smartorder.identity.domain.port.inbound.AuthenticateUserUseCase;
+import az.unibank.smartorder.identity.domain.port.inbound.RefreshTokenUseCase;
+import az.unibank.smartorder.identity.domain.port.inbound.RegisterUserUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,8 @@ class LogoutIntegrationTest {
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.rabbitmq.host", rabbitmq::getHost);
         registry.add("spring.rabbitmq.port", rabbitmq::getAmqpPort);
+        registry.add("spring.rabbitmq.username", rabbitmq::getAdminUsername);
+        registry.add("spring.rabbitmq.password", rabbitmq::getAdminPassword);
         registry.add("spring.data.redis.host", redis::getHost);
         registry.add("spring.data.redis.port", () -> redis.getMappedPort(6379));
     }
@@ -71,6 +75,14 @@ class LogoutIntegrationTest {
 
     @MockBean
     private AuthenticateUserUseCase authenticateUseCase;
+
+    // AuthDomainService implements all three use-case interfaces as a single bean, so mocking one
+    // evicts it; mock the other two as well so AuthController's remaining dependencies are satisfied.
+    @MockBean
+    private RegisterUserUseCase registerUseCase;
+
+    @MockBean
+    private RefreshTokenUseCase refreshUseCase;
 
     @Autowired
     private az.unibank.smartorder.security.JwtTokenProvider jwtTokenProvider;
@@ -100,7 +112,10 @@ class LogoutIntegrationTest {
         );
 
         // Act & Assert 1: Token1 is valid before logout
-        mockMvc.perform(get("/api/v1/products")
+        // ProductController maps to /products; MockMvc does not apply server.servlet.context-path (/api/v1).
+        // (AuthController hardcodes /api/v1/auth, so those calls below keep that prefix — see audit note on
+        // the context-path vs. hardcoded-prefix inconsistency.)
+        mockMvc.perform(get("/products")
                         .header("Authorization", "Bearer " + token1))
                 .andExpect(status().isOk());
 
@@ -110,7 +125,7 @@ class LogoutIntegrationTest {
                 .andExpect(status().isNoContent());
 
         // Assert 3: Token1 is now rejected
-        mockMvc.perform(get("/api/v1/products")
+        mockMvc.perform(get("/products")
                         .header("Authorization", "Bearer " + token1))
                 .andExpect(status().isUnauthorized());
 
@@ -121,7 +136,7 @@ class LogoutIntegrationTest {
                 .andExpect(status().isOk());
 
         // Assert 5: Token2 is accepted
-        mockMvc.perform(get("/api/v1/products")
+        mockMvc.perform(get("/products")
                         .header("Authorization", "Bearer " + token2))
                 .andExpect(status().isOk());
     }

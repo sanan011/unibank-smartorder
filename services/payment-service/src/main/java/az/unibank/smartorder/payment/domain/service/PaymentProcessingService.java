@@ -23,37 +23,33 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PaymentProcessingService implements ProcessOrderPaymentUseCase {
+public class PaymentProcessingService {
 
     private final IdempotencyRepository idempotencyRepository;
     private final PaymentRepository paymentRepository;
-    private final PaymentGatewayPort paymentGatewayPort;
-    private final EventPublisherPort eventPublisherPort;
 
-    @Override
     @Transactional
-    public void processPayment(OrderCreatedEvent event) {
+    public Payment initializePayment(OrderCreatedEvent event) {
         String eventId = event.eventId().toString();
 
         if (idempotencyRepository.exists(eventId)) {
             log.info("Event {} already processed, skipping duplicate", eventId);
-            return;
+            return null; // Signals it's already processed
         }
 
         UUID orderId = event.payload().orderId();
         UUID customerId = event.payload().customerId();
         BigDecimal amount = event.payload().totalAmount();
         String currency = event.payload().currency();
-        UUID correlationId = event.correlationId();
 
-        // 1. Check if payment already exists for this order (safeguard)
+        // 1. Check if payment already exists for this order
         Payment payment = paymentRepository.findByOrderId(orderId).orElseGet(() -> {
             Payment newPayment = Payment.builder()
                     .id(PaymentId.of(UUID.randomUUID()))
                     .orderId(orderId)
-                    .customerId(customerId != null ? customerId : UUID.randomUUID()) // Fallback if missing
+                    .customerId(customerId != null ? customerId : UUID.randomUUID())
                     .amount(amount)
-                    .currency(currency != null ? currency : "AZN") // Fallback if missing
+                    .currency(currency != null ? currency : "AZN")
                     .status(PaymentStatus.PENDING)
                     .attemptCount(0)
                     .createdAt(Instant.now())
@@ -68,43 +64,45 @@ public class PaymentProcessingService implements ProcessOrderPaymentUseCase {
                 payment.resetToPending();
             }
             payment.process();
-            payment = paymentRepository.save(payment);
-        } else {
-            log.info("Payment for order {} is in status {}, skipping gateway call", orderId, payment.getStatus());
-            idempotencyRepository.save(eventId, event.eventType());
-            return;
+            return paymentRepository.save(payment);
         }
 
-        // 3. Gateway Call
-        boolean success;
-        try {
-            success = paymentGatewayPort.processPayment(orderId, amount);
-        } catch (Exception e) {
-            log.error("Gateway exception", e);
-            success = false;
-        }
+        return payment;
+    }
 
-        // 4. Update state and publish events
+    @Transactional
+    public az.unibank.smartorder.events.DomainEvent finalizePayment(PaymentId paymentId, boolean success, OrderCreatedEvent event) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new IllegalStateException("Payment not found"));
+
+        az.unibank.smartorder.events.DomainEvent resultEvent;
+
         if (success) {
             String gatewayRef = "MOCK-REF-" + payment.getId().value().toString().substring(0, 8);
             payment.markSuccess(gatewayRef);
             paymentRepository.save(payment);
 
             PaymentProcessedEvent.Payload processedPayload = new PaymentProcessedEvent.Payload(
-                    orderId, customerId, payment.getId().value(), "SUCCESS", amount, payment.getCurrency(), gatewayRef
+                    payment.getOrderId(), payment.getCustomerId(), payment.getId().value(), "SUCCESS", payment.getAmount(), payment.getCurrency(), gatewayRef
             );
-            eventPublisherPort.publish("payment.processed", new PaymentProcessedEvent(correlationId, processedPayload));
+            resultEvent = new PaymentProcessedEvent(event.correlationId(), processedPayload);
         } else {
             payment.markFailed("Payment declined by mock gateway");
             paymentRepository.save(payment);
 
             PaymentFailedEvent.Payload failedPayload = new PaymentFailedEvent.Payload(
-                    orderId, customerId, payment.getId().value(), "Payment declined by mock gateway", payment.getAttemptCount()
+                    payment.getOrderId(), payment.getCustomerId(), payment.getId().value(), "Payment declined by mock gateway", payment.getAttemptCount()
             );
-            eventPublisherPort.publish("payment.failed", new PaymentFailedEvent(correlationId, failedPayload));
+            resultEvent = new PaymentFailedEvent(event.correlationId(), failedPayload);
         }
 
-        // 5. Save Idempotency
-        idempotencyRepository.save(eventId, event.eventType());
+        // Save Idempotency
+        idempotencyRepository.save(event.eventId().toString(), event.eventType());
+        return resultEvent;
+    }
+
+    @Transactional
+    public void markEventProcessed(OrderCreatedEvent event) {
+        idempotencyRepository.save(event.eventId().toString(), event.eventType());
     }
 }

@@ -9,6 +9,9 @@ COPY build.gradle settings.gradle ./
 COPY services services
 COPY shared shared
 
+# Normalize line endings (gradlew may be checked out with CRLF on Windows) and make it executable
+RUN sed -i 's/\r$//' gradlew && chmod +x gradlew
+
 # Build the notification-service
 RUN ./gradlew :services:notification-service:build -x test --no-daemon
 

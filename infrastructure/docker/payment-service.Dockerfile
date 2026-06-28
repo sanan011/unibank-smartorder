@@ -12,8 +12,8 @@ COPY shared shared
 # Normalize line endings (gradlew may be checked out with CRLF on Windows) and make it executable
 RUN sed -i 's/\r$//' gradlew && chmod +x gradlew
 
-# Build the order-service
-RUN ./gradlew :services:order-service:build -x test --no-daemon
+# Build the payment-service
+RUN ./gradlew :services:payment-service:build -x test --no-daemon
 
 # Stage 2: Create the runtime image
 FROM eclipse-temurin:21-jre-alpine
@@ -24,7 +24,7 @@ WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
-COPY --from=builder /app/services/order-service/build/libs/order-service-*-SNAPSHOT.jar app.jar
+COPY --from=builder /app/services/payment-service/build/libs/payment-service-*-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 

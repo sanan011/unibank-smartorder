@@ -34,7 +34,8 @@ public class Order {
         
         Money calculatedTotal = items.stream()
                 .map(OrderItem::getSubTotal)
-                .reduce(Money.ZERO, Money::add);
+                .reduce(Money::add)
+                .orElse(Money.ZERO);
                 
         if (!calculatedTotal.equals(totalAmount)) {
             throw new BusinessException("INVALID_TOTAL", "Order total amount does not match items subtotal", 400);

@@ -11,6 +11,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -41,6 +43,8 @@ public class OrderItemJpaEntity {
     @Column(name = "unit_price")
     private BigDecimal unitPrice;
 
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 3)
     private String currency;
 
     private int quantity;

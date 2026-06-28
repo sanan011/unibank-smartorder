@@ -12,6 +12,11 @@ spring:
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
+      data-source-properties:
+        # Let PostgreSQL infer/cast bound String parameters to their column type (e.g. jsonb for the
+        # outbox payload). Without this, inserting a JSON String into a jsonb column fails with
+        # "column is of type jsonb but expression is of type character varying".
+        stringtype: unspecified
 
   jpa:
     hibernate:

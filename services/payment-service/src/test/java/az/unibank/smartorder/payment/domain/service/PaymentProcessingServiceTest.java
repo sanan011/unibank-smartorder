@@ -2,6 +2,7 @@ package az.unibank.smartorder.payment.domain.service;
 
 import az.unibank.smartorder.events.order.OrderCreatedEvent;
 import az.unibank.smartorder.events.payment.PaymentProcessedEvent;
+import az.unibank.smartorder.payment.application.handler.PaymentCommandHandlers;
 import az.unibank.smartorder.payment.domain.model.aggregate.Payment;
 import az.unibank.smartorder.payment.domain.model.valueobject.PaymentId;
 import az.unibank.smartorder.payment.domain.model.valueobject.PaymentStatus;
@@ -40,11 +41,15 @@ class PaymentProcessingServiceTest {
     private EventPublisherPort eventPublisherPort;
 
     private PaymentProcessingService paymentProcessingService;
+    private PaymentCommandHandlers paymentCommandHandlers;
 
     @BeforeEach
     void setUp() {
         paymentProcessingService = new PaymentProcessingService(
-                idempotencyRepository, paymentRepository, paymentGatewayPort, eventPublisherPort
+                idempotencyRepository, paymentRepository
+        );
+        paymentCommandHandlers = new PaymentCommandHandlers(
+                paymentProcessingService, paymentGatewayPort, eventPublisherPort
         );
     }
 
@@ -55,7 +60,7 @@ class PaymentProcessingServiceTest {
 
         when(idempotencyRepository.exists(eventId.toString())).thenReturn(true);
 
-        paymentProcessingService.processPayment(event);
+        paymentCommandHandlers.processPayment(event);
 
         verify(paymentRepository, never()).save(any());
         verify(paymentGatewayPort, never()).processPayment(any(), any());
@@ -67,12 +72,22 @@ class PaymentProcessingServiceTest {
         UUID orderId = UUID.randomUUID();
         OrderCreatedEvent event = new OrderCreatedEvent(eventId, "OrderCreatedEvent", "1.0", null, UUID.randomUUID(), new OrderCreatedEvent.Payload(orderId, UUID.randomUUID(), List.of(), BigDecimal.TEN, "USD"));
 
+        Payment mockedPayment = Payment.builder()
+                .id(PaymentId.of(UUID.randomUUID()))
+                .orderId(orderId)
+                .amount(BigDecimal.TEN)
+                .currency("USD")
+                .status(PaymentStatus.PENDING)
+                .attemptCount(1)
+                .build();
+
         when(idempotencyRepository.exists(eventId.toString())).thenReturn(false);
         when(paymentRepository.findByOrderId(orderId)).thenReturn(Optional.empty());
         when(paymentGatewayPort.processPayment(eq(orderId), any())).thenReturn(true);
-        when(paymentRepository.save(any(Payment.class))).thenAnswer(i -> i.getArguments()[0]);
+        when(paymentRepository.save(any(Payment.class))).thenReturn(mockedPayment);
+        when(paymentRepository.findById(any())).thenReturn(Optional.of(mockedPayment));
 
-        paymentProcessingService.processPayment(event);
+        paymentCommandHandlers.processPayment(event);
 
         verify(paymentGatewayPort).processPayment(eq(orderId), any());
         verify(eventPublisherPort).publish(eq("payment.processed"), any(PaymentProcessedEvent.class));
@@ -97,9 +112,10 @@ class PaymentProcessingServiceTest {
         when(idempotencyRepository.exists(eventId.toString())).thenReturn(false);
         when(paymentRepository.findByOrderId(orderId)).thenReturn(Optional.of(existingFailedPayment));
         when(paymentGatewayPort.processPayment(eq(orderId), any())).thenReturn(true);
-        when(paymentRepository.save(any(Payment.class))).thenAnswer(i -> i.getArguments()[0]);
+        when(paymentRepository.save(any(Payment.class))).thenReturn(existingFailedPayment);
+        when(paymentRepository.findById(any())).thenReturn(Optional.of(existingFailedPayment));
 
-        paymentProcessingService.processPayment(event);
+        paymentCommandHandlers.processPayment(event);
 
         verify(paymentGatewayPort).processPayment(eq(orderId), any());
         verify(eventPublisherPort).publish(eq("payment.processed"), any(PaymentProcessedEvent.class));

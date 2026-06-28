@@ -5,6 +5,8 @@ import az.unibank.smartorder.order.domain.model.entity.OrderItem;
 import az.unibank.smartorder.order.infrastructure.persistence.jpa.entity.OrderJpaEntity;
 import az.unibank.smartorder.order.infrastructure.persistence.jpa.entity.OrderItemJpaEntity;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -13,6 +15,10 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface OrderPersistenceMapper {
 
+    // Disable the Lombok builder for this mapping: MapStruct does not invoke the @AfterMapping
+    // lifecycle hook (linkOrderItems) when the target is built via a builder, which left each
+    // order item's order_id FK null. Using setters instead makes the @AfterMapping run.
+    @BeanMapping(builder = @Builder(disableBuilder = true))
     @Mapping(target = "id", source = "id.value")
     @Mapping(target = "customerId", source = "customerId.value")
     @Mapping(target = "totalAmount", source = "totalAmount.amount")

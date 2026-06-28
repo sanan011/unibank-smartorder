@@ -19,6 +19,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -48,6 +50,8 @@ public class OrderJpaEntity {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 3)
     private String currency;
 
     @Version
@@ -69,7 +73,7 @@ public class OrderJpaEntity {
     @Column(name = "updated_by")
     private String updatedBy;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Builder.Default
     private List<OrderItemJpaEntity> items = new ArrayList<>();
     

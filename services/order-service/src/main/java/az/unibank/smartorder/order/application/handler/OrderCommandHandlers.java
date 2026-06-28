@@ -46,6 +46,7 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
     private final az.unibank.smartorder.order.domain.service.StockReservationService stockReservationService;
 
     @Override
+    @Transactional
     public Order createOrder(CreateOrderCommand command) {
         List<OrderItem> orderItems = command.getItems().stream().map(itemCmd -> {
             Product product = productRepository.findById(ProductId.of(itemCmd.getProductId()))
@@ -62,7 +63,8 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
 
         Money totalAmount = orderItems.stream()
                 .map(OrderItem::getSubTotal)
-                .reduce(Money.ZERO, Money::add);
+                .reduce(Money::add)
+                .orElse(Money.ZERO);
 
         Order order = Order.builder()
                 .id(OrderId.of(UUID.randomUUID()))
@@ -76,6 +78,7 @@ public class OrderCommandHandlers implements CreateOrderUseCase, CancelOrderUseC
     }
 
     @Override
+    @Transactional
     public Order cancelOrder(CancelOrderCommand command) {
         Order order = orderRepository.findById(OrderId.of(command.getOrderId()))
                 .orElseThrow(() -> new BusinessException("ORDER_NOT_FOUND", "Order not found", 404));

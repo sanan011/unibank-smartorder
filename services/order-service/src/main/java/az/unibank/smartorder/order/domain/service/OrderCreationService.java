@@ -18,7 +18,6 @@ public class OrderCreationService {
     private final OrderRepository orderRepository;
     private final OutboxRepository outboxRepository;
 
-    @Transactional
     public Order createOrder(Order order) {
         order.initialize();
         stockReservationService.reserveStockFor(order);
