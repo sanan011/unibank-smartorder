@@ -27,3 +27,11 @@ The tests are located in `docs/performance/k6/`.
 | TBD | Smoke | 1 | TBD ms | TBD % | ⬜ |
 | TBD | Load | 50 | TBD ms | TBD % | ⬜ |
 | TBD | Stress | 100 | TBD ms | TBD % | ⬜ |
+
+## Security Scan
+
+An OWASP ZAP Baseline Scan has been configured in the GitHub Actions CI pipeline (`.github/workflows/security-scan.yml`). It scans the `order-service` API endpoints for common security vulnerabilities (e.g., missing security headers, CSRF misconfigurations) automatically on each push to `main` and `release/**` branches.
+
+- **Target:** `http://localhost:8080/api/v1`
+- **Failure Threshold:** The CI job will only fail on **High Severity** issues (warnings are logged but do not fail the build).
+- **Report:** The ZAP HTML report is generated and uploaded as a workflow artifact for further review.

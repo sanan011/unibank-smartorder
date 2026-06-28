@@ -1,116 +1,128 @@
-# Unibank-SmartOrder
+# Action Baseline
 
-**Unibank-SmartOrder** is a production-grade, event-driven Order Management System (OMS). It manages the full lifecycle of customer orders — from product discovery and order placement through payment processing and customer notification. The system is designed for high concurrency, strict data consistency, fault tolerance, and operational observability.
+A GitHub Action for running the ZAP [Baseline scan](https://www.zaproxy.org/docs/docker/baseline-scan/) to find vulnerabilities in your web application. 
+ 
+The ZAP baseline action scans a target URL for vulnerabilities and maintains an issue in GitHub repository for the
+identified alerts. Read the following [blog post](https://www.zaproxy.org/blog/2020-04-09-automate-security-testing-with-zap-and-github-actions) 
+for additional information.
 
----
+## Inputs
 
-## 🏗️ Architecture & Project Overview
+### `target`
 
-The system is decomposed into three primary bounded contexts, implemented as independently deployable microservices following **Clean Architecture**, **Domain Driven Design (DDD)**, and **Hexagonal Architecture** principles.
+**Required** The URL of the web application to be scanned. This can be either a publicly available web application or a locally
+accessible URL.
 
-Inter-service communication is handled via an event-driven architecture using the **Outbox Pattern** and a message broker to guarantee eventual consistency without tight coupling.
+### `docker_name`
 
-### Microservices
-1. **Order Service (`:8080`)**: Manages the product catalog, handles order creation with atomic stock decrements, and deals with identity and authentication.
-2. **Payment Service (`:8081`)**: Processes payments via an external (emulated) gateway. Handles retries, circuit breaking, and idempotency.
-3. **Notification Service (`:8082`)**: Dispatches structured notifications to customers on order events and stores an auditable history in a document store.
+**Optional** The name of the docker file to be executed. By default the action runs the stable version of ZAP. But you can 
+configure the parameter to use the weekly builds.
 
----
+### `rules_file_name`
 
-## 🛠️ Tech Stack
+**Optional** You can also specify a relative path to the rules file to ignore any alerts from the ZAP scan. Make sure to create
+the rules file inside the relevant repository. The following shows a sample rules file configuration.
+Make sure to checkout the repository (actions/checkout@v2) to provide the ZAP rules to the scan action.
 
-- **Backend**: Java 21, Spring Boot 3.3
-- **Architecture**: Microservices, Hexagonal Architecture, Domain Driven Design (DDD), Event-Driven Architecture (Outbox Pattern)
-- **Message Broker**: RabbitMQ
-- **Databases**:
-  - PostgreSQL (Relational data for Orders & Payments)
-  - MongoDB (Document store for Notifications)
-  - Redis (Caching and distributed rate limiting)
-- **Observability**: OpenTelemetry, Prometheus, Grafana
-- **Deployment**: Docker, Docker Compose
+```tsv
+10011	IGNORE	(Cookie Without Secure Flag)
+10015	IGNORE	(Incomplete or No Cache-control and Pragma HTTP Header Set)
+``` 
 
----
+### `cmd_options`
 
-## 🚀 How to Run Locally with Docker
+**Optional** Additional command lines options for the baseline script
 
-The entire stack can be launched via Docker Compose with a single command. It includes the microservices, databases, message broker, and observability tools.
+### `allow_issue_writing`
 
-1. **Navigate to the deployment directory**:
-   ```bash
-   cd deployment
-   ```
+**Optional** By default the baseline action will file the report to the GitHub issue using the `issue_title` input.
+Set this to false if you don't want the issue to be created or updated.
 
-2. **Setup environment variables**:
-   Copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-   *(Optional) You can edit `.env` to customize database credentials or JWT secrets.*
+### `issue_title`
 
-3. **Start the infrastructure and services**:
-   ```bash
-   docker-compose up -d
-   ```
-   *(Or use `docker compose up -d` depending on your Docker version).*
+**Optional** The title for the GitHub issue to be created
 
-4. **Verify it's running**:
-   - Order Service: `http://localhost:8080`
-   - Payment Service: `http://localhost:8081`
-   - Notification Service: `http://localhost:8082`
-   - RabbitMQ Management: `http://localhost:15672` (admin / supersecret_rmq_password)
-   - Grafana: `http://localhost:3000` (admin / admin)
-   - Prometheus: `http://localhost:9090`
+### `token`
 
-To tear down the environment:
-```bash
-docker-compose down -v
+**Optional** ZAP action uses the default action token provided by GitHub to create and update the issue for the baseline scan.
+You do not have to create a dedicated token. Make sure to use the GitHub's default action token when running the action(`secrets.GITHUB_TOKEN`).
+
+### `fail_action`
+
+**Optional** By default ZAP Docker container will fail with an [exit code](https://github.com/zaproxy/zaproxy/blob/efb404d38280dc9ecf8f88c9b0c658385861bdcf/docker/zap-baseline.py#L31), 
+if it identifies any alerts. Set this option to `true` if you want to fail the status of the GitHub Scan if ZAP identifies any alerts during the scan.  
+
+### `artifact_name`
+
+**Optional** By default the baseline action will attach the report to the build with the name `zap_scan`. Set this to a different string to name it something else. Consult [GitHub's documentation](https://github.com/actions/toolkit/blob/main/packages/artifact/docs/additional-information.md#non-supported-characters) for which artifact names are allowed.
+
+## Environment variables
+
+If set, the following [ZAP authentication environment variables](https://www.zaproxy.org/docs/authentication/handling-auth-yourself/#authentication-env-vars)
+will be copied into the docker container:
+
+- `ZAP_AUTH_HEADER_VALUE`
+- `ZAP_AUTH_HEADER`
+- `ZAP_AUTH_HEADER_SITE`
+
+## Example usage
+
+** Basic **
+```
+steps:
+  - name: ZAP Scan
+    uses: zaproxy/action-baseline@v0.15.0
+    with:
+      target: 'https://www.zaproxy.org'
 ```
 
----
+** Advanced **
 
-## 📡 API Endpoints Overview
+```
+on: [push]
 
-All APIs are exposed under the `/api/v1` context path.
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan the webapplication
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: master
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
+          target: 'https://www.zaproxy.org'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
+```
 
-### Identity & Authentication (Order Service)
-- `POST /api/v1/auth/register` - Register a new user
-- `POST /api/v1/auth/login` - Login and receive JWT tokens
-- `POST /api/v1/auth/refresh` - Refresh JWT token
-- `POST /api/v1/auth/logout` - Logout and blocklist the token
+## Issue Description
 
-### Catalog & Products (Order Service)
-- `GET /api/v1/products` - List products with pagination and caching
-- `GET /api/v1/products/{id}` - Get product details
-- `PATCH /api/v1/products/{id}/stock` - Update product stock (Admin only)
+The following [issue](https://github.com/zaproxy/zaproxy-website/issues/93) shows how the GitHub Baseline Action scans the 
+[https://www.zaproxy.org/](https://www.zaproxy.org/) website and notifies the users via opening an issue in the ZAP website repository. 
+The issue will be created by the GitHub Actions bot and will list the alerts as issue comments.
 
-### Order Management (Order Service)
-- `POST /api/v1/orders` - Place a new order
-- `GET /api/v1/orders` - List orders for the authenticated user
-- `GET /api/v1/orders/{id}` - Get order details
-- `POST /api/v1/orders/{id}/cancel` - Cancel an order
+[![issue open](./images/zap-issue-1.png)](https://github.com/zaproxy/zaproxy-website/issues/93#issue-597219582)
 
-### Notifications (Notification Service)
-- `GET /api/v1/notifications` - Get notifications for a user
-- `GET /api/v1/notifications/{id}` - Get notification details
+To demonstrate the workflow of the action; we are ignoring the alerts as they are not relevant, but this has the same effect as fixing them.
+Therefore during the second scan we are ignoring few alerts via ZAP rules and the action bot updates the issue with the newly ignored/resolved alerts. 
+[![comment with issues resolved](./images/zap-issue-2.png)](https://github.com/zaproxy/zaproxy-website/issues/93#issuecomment-611490632)
 
----
 
-## 🔐 Environment Variables
+During the last scan we are ignoring all the alerts, thus resulting in finding zero alerts. Based on the scan results 
+the actions bot will close the ongoing open issue.
+[![issue closed](./images/zap-issue-3.png)](https://github.com/zaproxy/zaproxy-website/issues/93#issuecomment-611496321)
 
-The project uses `.env` files for configuration. Here is a breakdown of the core environment variables available in `deployment/.env.example`:
+## Localised Alert Details
 
-| Variable | Description | Default Value |
-|----------|-------------|---------------|
-| `DB_HOST` | Database host | `localhost` |
-| `DB_PORT` | Database port | `5432` |
-| `DB_NAME` | Main order database name | `order_db` |
-| `DB_USER` | PostgreSQL username | `smartorder` |
-| `DB_PASSWORD` | PostgreSQL password | `supersecret_db_password` |
-| `REDIS_HOST` | Redis host | `localhost` |
-| `REDIS_PORT` | Redis port | `6379` |
-| `REDIS_PASSWORD` | Redis password | `supersecret_redis_password` |
-| `RABBITMQ_HOST` | RabbitMQ host | `localhost` |
-| `RABBITMQ_PORT` | RabbitMQ AMQP port | `5672` |
-| `RABBITMQ_USER` | RabbitMQ username | `admin` |
-| `RABBITMQ_PASSWORD`| RabbitMQ password | `supersecret_rmq_password` |
-| `JWT_SECRET` | Secret key used to sign JWTs (Must be 512+ bits) | `this-is-a-very-secret-key...` |
+ZAP is internationalised and alert information is available in many languages.
+
+You can change the language used by this action by changing the locale via the `cmd_options` e.g.: `-z "-config view.locale=fr_FR"`
+
+See [https://github.com/zaproxy/zaproxy/tree/main/zap/src/main/dist/lang](https://github.com/zaproxy/zaproxy/tree/main/zap/src/main/dist/lang) for the full set of locales currently supported.
+
+You can help improve ZAP translations via [https://crowdin.com/project/zaproxy](https://crowdin.com/project/zaproxy). 

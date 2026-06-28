@@ -49,3 +49,22 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'HIGH,CRITICAL'
+
+  zap-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Start services
+        run: |
+          docker compose -f deployment/docker-compose.yml up -d
+          # Wait for the service to become responsive
+          sleep 60
+
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'http://localhost:8080/api/v1'
+          # -I: do not return failure on warning (only fail on high severity/errors)
+          cmd_options: '-I'
