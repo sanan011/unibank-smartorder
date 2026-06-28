@@ -57,7 +57,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
 
         if (("POST".equalsIgnoreCase(request.getMethod())) && 
-            (path.equals("/api/v1/auth/login") || path.equals("/api/v1/auth/register"))) {
+            (path.equals("/auth/login") || path.equals("/auth/register"))) {
             
             String ip = extractClientIp(request);
             String key = "rate_limit:auth:" + ip;
@@ -101,7 +101,7 @@ public class RateLimitFilter extends OncePerRequestFilter {
         return path.startsWith("/actuator") || 
                path.startsWith("/v3/api-docs") || 
                path.startsWith("/swagger-ui") ||
-               path.startsWith("/api/v1/auth"); // Auth handled separately
+               path.startsWith("/auth"); // Auth handled separately
     }
 
     private String getClientIdentifier(HttpServletRequest request) {

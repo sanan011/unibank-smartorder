@@ -120,7 +120,7 @@ class LogoutIntegrationTest {
                 .andExpect(status().isOk());
 
         // Act 2: Logout with Token1
-        mockMvc.perform(post("/api/v1/auth/logout")
+        mockMvc.perform(post("/auth/logout")
                         .header("Authorization", "Bearer " + token1))
                 .andExpect(status().isNoContent());
 
@@ -130,7 +130,7 @@ class LogoutIntegrationTest {
                 .andExpect(status().isUnauthorized());
 
         // Act 4: Login again to get new Token2
-        mockMvc.perform(post("/api/v1/auth/login")
+        mockMvc.perform(post("/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"email\":\"test@test.com\",\"password\":\"password\"}"))
                 .andExpect(status().isOk());

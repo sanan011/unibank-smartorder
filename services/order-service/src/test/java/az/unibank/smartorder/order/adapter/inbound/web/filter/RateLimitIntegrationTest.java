@@ -75,21 +75,21 @@ class RateLimitIntegrationTest {
     void rateLimiter_allowsRequestsUpToLimit_thenReturns429() throws Exception {
         // Limit is 5
         for (int i = 0; i < 5; i++) {
-            mockMvc.perform(get("/api/v1/products")
+            mockMvc.perform(get("/products")
                     .header("X-Forwarded-For", "192.168.1.100"))
                     .andExpect(status().isOk())
                     .andExpect(header().exists("X-RateLimit-Remaining"));
         }
 
         // 6th request should fail
-        mockMvc.perform(get("/api/v1/products")
+        mockMvc.perform(get("/products")
                 .header("X-Forwarded-For", "192.168.1.100"))
                 .andExpect(status().isTooManyRequests())
                 .andExpect(header().string("X-RateLimit-Remaining", "0"))
                 .andExpect(header().exists("Retry-After"));
                 
         // A different IP should still be allowed
-        mockMvc.perform(get("/api/v1/products")
+        mockMvc.perform(get("/products")
                 .header("X-Forwarded-For", "192.168.1.101"))
                 .andExpect(status().isOk());
     }
